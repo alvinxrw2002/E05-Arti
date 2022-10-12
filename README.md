@@ -10,16 +10,15 @@ Anggota:
 
 ## Nama Website:
 ARTi
-
 Link Aplikasi Heroku: https://e05-arti.herokuapp.com
 
 
 ## Tools:
-HTML
-Django
-Jquery
-CSS
-Bootstrap
+* HTML
+* Django
+* Jquery
+* CSS
+* Bootstrap
 
 ## A.) Tentang Website
 Website dengan ARTi ini merupakan wadah untuk setiap orang yang memiliki keinginan untuk membantu masyarakat luas yang mengalami kesulitan ekonomi yang disebabkan oleh pandemi dan faktor lainnya. Selain memberikan layanan bantuan, website kami juga memberikan sarana untuk setiap orang yang ingin berkarya dengan meng-upload karya terbaik mereka yang nantinya akan dipromosikan dan 
@@ -29,14 +28,14 @@ Membantu masyarakat yang mengalami kesulitan ekonomi yang disebabkan oleh pandem
 
 
 ## C) Features & Requirements (modul)
-Login
-Register
-Home
-Post Karya
-Pembelian karya
-Profile user
-Galeri
+* Login
+* Register
+* Home
+* Post Karya
+* Pembelian karya
+* Profile user
+* Galeri
 
 ## D) Role
-Admin
-Pengguna
+* Admin
+* Pengguna
