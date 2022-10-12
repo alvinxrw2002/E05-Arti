@@ -1,12 +1,12 @@
 # PBP - E05
 
 Anggota:
-Alvin Xavier Rakha Wardhana - 2106750300
-Aulia Satrio Wijoyo - 2106752123
-Idham Vadri -  
-Rebeka Alma - 2106653060
-Stenly Yosua Saputra - 2106704244
-Zacky Muchlas Dharmawan - 2106702296
+* Alvin Xavier Rakha Wardhana - 2106750300
+* Aulia Satrio Wijoyo - 2106752123
+* Idham Vadri -  
+* Rebeka Alma - 2106653060
+* Stenly Yosua Saputra - 2106704244
+* Zacky Muchlas Dharmawan - 2106702296
 
 ## Nama Website:
 ARTi
