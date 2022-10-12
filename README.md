@@ -11,7 +11,7 @@ Zacky Muchlas Dharmawan - 2106702296
 ## Nama Website:
 ARTi
 
-Link Aplikasi Heroku:
+Link Aplikasi Heroku: https://e05-arti.herokuapp.com
 
 
 ## Tools:
