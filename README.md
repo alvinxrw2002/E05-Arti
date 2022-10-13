@@ -29,12 +29,39 @@ Membantu masyarakat yang mengalami kesulitan ekonomi yang disebabkan oleh pandem
 
 ## C) Features & Requirements (modul)
 * Login
+Untuk user melakukan login dalam home jika sudah memiliki akun. (sudah register)
+
+
 * Register
+Untuk user melakukan pendaftaran akun (register) agar dapat login.
+
+
 * Home
+Menampilkan tampilan utama homepage website dengan berbagai fitur yang ada.
+
+
 * Post Karya
+Untuk user meng-upload karya-karya mereka yang nantinya dapat diperjualbelikan untuk donasi.
+
+
 * Pembelian karya
+Untuk membeli karya-karya yang dipilih dan nantinya akan ada pemberitahuan yang menandakan bahwa karya yang dipilih sudah soldout.
+
+
 * Profile user
+Untuk menampilkan biodata akun, jumlah total donasi, karya user.
+
+
 * Galeri
+Untuk menampilkan explore yang berisi karya-karya yang relate dengan kategori yang sesuai dengan apa yang kita suka dimana informasi kategori tersebut sudah didapat saat melakukan register.
+
+
+* Leaderboard: Menampilkan 10 pengguna dengan donasi dan jumlah like terbesar
+Untuk menampilkan top 10 
+
+
+* Update 
+
 
 ## D) Role
 * Admin
