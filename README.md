@@ -3,7 +3,7 @@
 Anggota:
 * Alvin Xavier Rakha Wardhana - 2106750300
 * Aulia Satrio Wijoyo - 2106752123
-* Idham Vadri -  
+* Idham Vadri - 2106752174
 * Rebeka Alma - 2106653060
 * Stenly Yosua Saputra - 2106704244
 * Zacky Muchlas Dharmawan - 2106702296
