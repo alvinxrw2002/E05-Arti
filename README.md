@@ -64,5 +64,6 @@ Menampilkan 10 pengguna dengan donasi dan jumlah like terbanyak.
 Menampilkan progress atau history dari kegiatan donasi yang sudah terkumpul beserta dengan foto-fotonya.
 
 ## D) Role
-* Admin
-* Pengguna
+* Admin = Memiliki akses khusus yang dapat melakukan hal di luar role pengguna seperti menghapus postingan yang dianggap tidak sesuai/mengandung unsur sara atau pornografi.
+
+* Pengguna = Role yang umum dipakai untuk pengguna web aplikasi ini.
