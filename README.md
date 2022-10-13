@@ -66,4 +66,7 @@ Menampilkan progress atau history dari kegiatan donasi yang sudah terkumpul bese
 ## D) Role
 * Admin = Memiliki akses khusus yang dapat melakukan hal di luar role pengguna seperti menghapus postingan yang dianggap tidak sesuai/mengandung unsur sara atau pornografi.
 
-* Pengguna = Role yang umum dipakai untuk pengguna web aplikasi ini.
+* Guest User = User yang mengakses website tanpa melakukan login.  Guest user memiliki akses yang terbatas, contohnya tidak bisa posting karya.
+
+* Login User = User yang mengakses website dengan melakukan login. Login user memiliki akses yang lebih luas, seperti dapat posting karya.
+
