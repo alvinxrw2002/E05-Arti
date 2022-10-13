@@ -22,11 +22,10 @@ https://e05-arti.herokuapp.com
 * Bootstrap
 
 ## A.) Tentang Website
-Website dengan ARTi ini merupakan wadah untuk setiap orang yang memiliki keinginan untuk membantu masyarakat luas yang mengalami kesulitan ekonomi yang disebabkan oleh pandemi dan faktor lainnya. Selain memberikan layanan bantuan, website kami juga memberikan sarana untuk setiap orang yang ingin berkarya dengan meng-upload karya terbaik mereka yang nantinya akan dipromosikan dan 
+Website dengan nama ARTi ini merupakan wadah untuk setiap orang yang memiliki keinginan untuk membantu masyarakat luas yang mengalami kesulitan ekonomi yang disebabkan oleh pandemi dan faktor lainnya. Selain memberikan layanan bantuan, website kami juga memberikan sarana untuk setiap orang yang ingin berkarya dengan meng-upload karya terbaik mereka yang nantinya akan dipromosikan dan dapat diperjualbelikan, lalu dana yang terkumpul digunakan untuk berdonasi.
 
 ## B) Tujuan / Objektif Website
-Membantu masyarakat yang mengalami kesulitan ekonomi yang disebabkan oleh pandemi dan faktor lainnya. Bantuan diberikan dalam bentuk uang  yang terkumpul dari layanan donasi.
-
+Membantu masyarakat yang mengalami kesulitan ekonomi yang disebabkan oleh pandemi dan faktor lainnya. Bantuan diberikan dalam bentuk uang  yang terkumpul dari layanan donasi. Selain itu, memberi ruang untuk setiap orang berekspresi melalui karya-karyanya.
 
 ## C) Features & Requirements (modul)
 * Login
