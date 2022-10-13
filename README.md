@@ -10,8 +10,9 @@ Anggota:
 
 ## Nama Website:
 ARTi
-Link Aplikasi Heroku: https://e05-arti.herokuapp.com
 
+## Link Aplikasi Heroku:
+https://e05-arti.herokuapp.com
 
 ## Tools:
 * HTML
