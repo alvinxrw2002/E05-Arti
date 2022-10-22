@@ -6,6 +6,7 @@
 {% endblock meta %}
 
 {% block content %}
-  <h1>Hello, world!</h1>
-  <h3>Template for the django project</h3>
+<a href="{% url 'arti:logout' %}" class="btn btn-danger">Logout</a>
+<h1>Hello, {{ user }}!</h1>
+<h3>ini buat halaman utamanya ya, gess</h3>
 {% endblock content %}
