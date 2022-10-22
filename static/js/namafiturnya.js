@@ -1,0 +1,1 @@
+// barangkali ada yg perlu file javascript terpisah, bisa pake ini, yaak
