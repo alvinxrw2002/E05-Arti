@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'arti',
     'leaderboard',
+    'profileuser',
+
 ]
 
 MIDDLEWARE = [
