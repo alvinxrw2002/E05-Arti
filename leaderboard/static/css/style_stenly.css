@@ -1,17 +1,7 @@
-textarea {
-    resize: none;
-}
-
 .isi{
     margin-top: 1.5%;
 }
 
 
-@media (min-width: 800px){
-    textarea {
-        resize: none;
-        width: 100px;
-    }
-}
 
 

@@ -11,4 +11,4 @@ urlpatterns = [
     path('register', register, name='register'),
     path('logout', logout_user, name='logout'),
     path('post-karya', post_karya, name='post_karya'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
