@@ -7,5 +7,5 @@ class ReviewForm(forms.ModelForm):
         fields = ['text']
         labels = {'text':'Input Text'}
         widgets = {
-            'text' : forms.Textarea(attrs={'cols' : 5, 'rows' : 2})
+            'text' : forms.Textarea(attrs={'cols' : 5, 'rows' : 5, 'class':'form-control'})
         }
