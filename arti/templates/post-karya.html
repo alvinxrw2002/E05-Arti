@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Buat Task</title>
+{% endblock meta %}
+
+{% block content %}
+
+<div class="d-flex align-items-center justify-content-center">
+    <div>
+        <h1>Unggah karyamu disini</h1>
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            {{ form.as_p }}
+
+            <input type="submit" value="Post Karya" class="btn btn-outline-primary">
+        </form>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Hello, world!</title>
+{% endblock meta %}
+
+{% block content %}
+<nav class="navbar" style="background-color: #e3f2fd; border-radius: 10px;">
+    <a href="{% url 'arti:post_karya' %}" class="btn btn-primary">Post Karya</a>
+    <a href="{% url 'arti:logout' %}" class="btn btn-danger">Logout</a>
+</nav>
+<h1>Hello, {{ user }}!</h1>
+<h3>ini buat halaman utamanya ya, gess</h3>
+
+<div class="row">
+    {% for karya in karyas %}
+    <div id="${idData}" class="col-sm-12">
+        <div id="hvr-sweep-to-right" class="card text-center" style="margin: 15px 0;">
+            <div class="card-body">
+                <img src="{{ karya.karya_image }}">
+            </div>
+        </div>
+    </div>`
+    {% endfor %}
+</div>
+{% endblock content %}
