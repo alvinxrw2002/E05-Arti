@@ -2,11 +2,11 @@
 {% load static %}
 
 {% block meta %}
-<title>Hello, world!</title>
+<title>Main</title>
 {% endblock meta %}
 
 {% block content %}
-<nav class="navbar" style="background-color: #e3f2fd; border-radius: 10px;">
+<nav class="navbar">
     <a href="{% url 'arti:post_karya' %}" class="btn btn-primary">Post Karya</a>
     <a href="{% url 'arti:logout' %}" class="btn btn-danger">Logout</a>
 </nav>
@@ -15,8 +15,8 @@
 
 <div class="row">
     {% for karya in karyas %}
-    <div id="${idData}" class="col-sm-12">
-        <div id="hvr-sweep-to-right" class="card text-center" style="margin: 15px 0;">
+    <div id="{{ karya.id }}" class="col-sm-12">
+        <div class="card text-center">
             <div class="card-body">
                 <img src="{{ karya.karya_image }}">
             </div>
