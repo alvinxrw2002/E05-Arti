@@ -1,0 +1,28 @@
+#ART{
+    color: hsl(218, 81%, 95%);
+    font-family: Snell Roundhand, cursive;
+}
+
+#lebih{
+    color: hsl(304, 96%, 45%);
+    font-family: Brush Script MT, Brush Script Std, cursive;
+}
+
+#ARTi {
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-image: url('/static/img/bg-login.jpg');
+}
+
+#par-container {
+    background-color: hsl(272, 91%, 71%);
+    border-radius: 50px;
+    z-index: 10;
+}
+
+.bg-glass {
+    background-color: hsla(0, 0%, 100%, 0.9) !important;
+    backdrop-filter: saturate(200%) blur(25px);
+}

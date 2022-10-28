@@ -1,22 +1,37 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block meta %}
 <title>Login</title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
 {% endblock meta %}
 
 {% block content %}
 
-<div class="login">
-    <form method="POST" action="">
-        {% csrf_token %}
-        <section class="vh-100">
-            <div class="container py-5 h-100">
-                <div class="row d-flex justify-content-center align-items-center h-100">
-                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                        <div class="card shadow-2-strong">
-                            <div class="card-body p-5 text-center">
+<body>
+    <!-- Section: Design Block -->
+    <section class="background-radial-gradient overflow-hidden">
+        <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+            <div class="row gx-lg-5 align-items-center mb-5">
+                <div id="par-container" class="col-lg-6 mb-5 mb-lg-0">
+                    <h1 class="my-5 display-5 fw-bold ls-tight">
+                        <div id="ART">Buat ART-mu </div>
+                        <div id="lebih">menjadi lebih ber<span id="ARTi">ARTi</span></div>
+                    </h1>
+                    <p class="mb-4">
+                        ARTi memberikan ruang bagi setiap orang yang ingin berkarya untuk meng-upload karya terbaik
+                        mereka yang nantinya akan dipromosikan dan dapat diperjualbelikan, lalu dana yang terkumpul
+                        digunakan untuk berdonasi bagi mereka yang membutuhkan.
+                    </p>
+                </div>
 
-                                <h3 class="mb-5">Login bang</h3>
+                <div id class="col-lg-6 mb-5 mb-lg-0 position-relative">
+                    <div class="card bg-glass">
+                        <div class="card-body p-5 text-center">
+                            <form method="POST" action="">
+                                {% csrf_token %}
+                                <h3 class="mb-5">Login</h3>
 
                                 <div class="form-outline mb-4">
                                     <input type="text" name="username" class="form-control form-control-lg">
@@ -36,23 +51,19 @@
                                 </ul>
                                 {% endif %}
 
-                                <button class="btn btn-success btn-lg btn-block" type="submit">Login</button>
+                                <button class="btn btn-outline-success btn-lg btn-block" type="submit">Login</button>
 
                                 <hr class="my-4">
+                            </form>
 
-                                <div> Belum mempunyai akun?</div>
+                            <div> Belum mempunyai akun? <a href="{% url 'arti:register' %}">Buat akun</a></div>
 
-                                <div>
-                                    <a href="{% url 'arti:register' %}"
-                                        class="btn btn-lg btn-block btn-primary">Buat Akun</a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </form>
-</div>
+        </div>
+    </section>
+</body>
 
 {% endblock content %}
