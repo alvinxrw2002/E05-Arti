@@ -6,22 +6,43 @@
 {% endblock meta %}
 
 {% block content %}
-<nav class="navbar">
+<nav class="navbar" style="background-color: #e3f2fd;">
     <a href="{% url 'arti:post_karya' %}" class="btn btn-primary">Post Karya</a>
+    {% if user.is_superuser %}
+        <a href="admin/" class="btn btn-outline-success">Menu Admin</a>
+    {% endif %}
     <a href="{% url 'arti:logout' %}" class="btn btn-danger">Logout</a>
 </nav>
 <h1>Hello, {{ user }}!</h1>
 <h3>ini buat halaman utamanya ya, gess</h3>
 
-<div class="row">
-    {% for karya in karyas %}
-    <div id="{{ karya.id }}" class="col-sm-12">
-        <div class="card text-center">
-            <div class="card-body">
-                <img src="{{ karya.karya_image }}">
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        {% for karya in karyas %}
+        <div class="col-sm-4">
+            <div id="hvr-sweep-to-right" class="card h-100" style="margin: 15px 0;">
+                <img src="{{ karya.gambar }}" class="card-img-top">
+                <div class="card-body">
+                    <p class="card-text">{{ karya.judul }}</p>
+                    <h5 class="card-title">Rp{{ karya.harga }}</h5>
+                    <p class="card-text">{{ karya.deskripsi }}</p>
+                </div>
+
+                {% if karya.user == user %}
+                    <div class="card-footer text-center">
+                        by you ({{karya.tanggal}})
+                        <a href="#" class="btn btn-outline-danger btn-lg">Hapus</a>
+                    </div>
+                {% else %}
+                    <div class="card-footer text-center">
+                        by {{karya.user}} ({{karya.tanggal}})
+                        <a href="#" class="btn btn-outline-warning btn-lg">Beli</a>
+                    </div>
+                {% endif %}
             </div>
         </div>
-    </div>`
-    {% endfor %}
+        {% endfor %}
+    </div>
 </div>
+
 {% endblock content %}

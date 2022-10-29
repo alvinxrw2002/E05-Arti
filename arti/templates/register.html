@@ -48,12 +48,6 @@
                                 <label class="form-label" for="form3Example4">Confirm password</label>
                             </div>
 
-                            <div class="d-grid gap-2 col-6 mx-auto">
-                                <button type="submit" class="btn btn-outline-warning btn-block mb-4">
-                                    Register
-                                </button>
-                            </div>
-
                             <div class="h-100 d-flex align-items-center justify-content-center">
                                 <div>
                                 {% for field in form %}
@@ -61,6 +55,14 @@
                                 {% endfor %}
                                 </div>
                             </div>
+
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button type="submit" class="btn btn-outline-warning btn-block mb-4">
+                                    Register
+                                </button>
+                            </div>
+
+                            <div>Already have an acccount?<a href="{% url 'arti:login' %}">Sign in</a></div>
                         </form>
                     </div>
                 </div>
