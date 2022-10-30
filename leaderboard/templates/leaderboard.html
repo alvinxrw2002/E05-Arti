@@ -21,6 +21,15 @@
                 }
             });
         });
+        $("#button_karya").click(function(){
+            $.ajax({
+                url: "{% url 'leaderboard:leaderboard_karya' %}",
+                type: "GET",
+                success: function(data){
+                    $("#leaderboard").html(data);
+                }
+            });
+        });
     });
 </script>
 
@@ -74,12 +83,13 @@
             <button id="button_karya" class="btn btn-outline-dark btn-sm" style="margin:0.5%; border-radius:17px"> Karya </button>
         </div>
     </div>
-    <div class="row isi row-cols-auto justify-content-center"  style="min-height:300px">
-        <span class="border border-3" style="border-radius:20%;">
-            <div class="col text-center pt-5" id="leaderboard" style="min-width:300px">
+    <div class="row isi row-cols-auto justify-content-center" id="leaderboard" style="min-height:300px">
+        <span class="border border-3" style="border-radius:20%; border-color: black!important;">
+            <div class="col text-center pt-5" style="min-width:300px">
 
             </div>
         </span>
+        
     </div>
 </div>
 
@@ -87,7 +97,7 @@
 <div class="container-fluid pt-5 pb-5" id="comments">
     <div class="row text-center mb-2"> <h3> Comments </h3></div>
     <div class="row justify-content-center mb-5" style="padding-top: 2px;">
-        <div class="col-9 col-sm-7 col-md-5">
+        <div class="col-9 col-sm-7 col-md-4">
             <div id="commentsCarousel" class="carousel slide" data-bs-ride="carousel" style="background-color:rgba(249, 249, 249, 0); height: 250px">
                 <div class="carousel-inner justify-content-center text-center" id="comments_carousel">
                     <!-- <div class="carousel-item active" style="border-radius: 20px;">
