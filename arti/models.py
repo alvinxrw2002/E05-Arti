@@ -15,4 +15,3 @@ class Karya(models.Model):
 class UserArti(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     kategori_favorit = models.CharField(max_length=255)
-    
