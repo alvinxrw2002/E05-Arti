@@ -48,7 +48,7 @@
                                 <label class="form-label" for="form3Example4">Confirm password</label>
                             </div>
 
-                            <!-- Password confirmation input -->
+                            <!-- Category preference input -->
                             <div class="form-outline mb-4">
                                 <select name="kategori" width="50px">
                                     <option value="abstract">abstract</option>
@@ -63,16 +63,18 @@
                                     <option value="sketch">sketch</option>
                                 </select>
                                 <br>
-                                <label class="form-label" for="form3Example4">Select your category preferrence</label>
+                                <label class="form-label" for="form3Example4">Select your category preference</label>
                             </div>
 
-                            <div class="h-100 d-flex align-items-center justify-content-center">
-                                <div>
-                                    {% for field in form %}
-                                        {{ field.errors }}
-                                    {% endfor %}
-                                </div>
+                            {% if form.errors %}
+                            {% for field in form %}
+                            {% for error in field.errors %}
+                            <div class="alert alert-danger">
+                                {{ error }}
                             </div>
+                            {% endfor %}
+                            {% endfor %}
+                            {% endif %}
 
                             <div class="d-grid gap-2 col-6 mx-auto">
                                 <button type="submit" class="btn btn-outline-warning btn-block mb-4">

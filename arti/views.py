@@ -1,6 +1,6 @@
 import datetime
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -26,8 +26,6 @@ def galeri(request):
 
     user_arti = UserArti.objects.get(user=loggedin_user)
     objects = Karya.objects.filter(kategori=user_arti.kategori_favorit)
-    for i in range(1000):
-        print(objects)
     context = {
         'user' : loggedin_user,
         'karyas' : objects
@@ -68,7 +66,7 @@ def register(request):
             messages.success(request, 'Akun telah berhasil dibuat!')
             return redirect('arti:login')
 
-    return render(request, 'register.html')
+    return render(request, 'register.html', {'form': form})
 
 @login_required(login_url='/login')
 def logout_user(request):
@@ -94,3 +92,9 @@ def post_karya(request):
 
     # Tampilkan form baru
     return render(request, 'post-karya.html', {'form': form})
+
+@login_required(login_url='/login')
+def delete_karya(request, karya_id):
+    karya_dihapus = Karya.objects.get(pk = karya_id)
+    karya_dihapus.delete()
+    return HttpResponse("success")

@@ -12,4 +12,5 @@ urlpatterns = [
     path('register', register, name='register'),
     path('logout', logout_user, name='logout'),
     path('post-karya', post_karya, name='post_karya'),
+    path('delete-karya/<karya_id>', delete_karya, name='delete_karya'),
 ]
