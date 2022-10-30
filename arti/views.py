@@ -1,24 +1,37 @@
 import datetime
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Karya
+from .models import Karya, UserArti
 from .forms import FormKarya
 
 # Create your views here.
 @login_required(login_url='/login')
 def index(request):
+    return render(request, 'index.html')
+
+@login_required(login_url='/login')
+def galeri(request):
     loggedin_user = request.user
-    objects = Karya.objects.all()
+    if loggedin_user.is_superuser:
+        context = {
+        'user': loggedin_user,
+        'karyas': Karya.objects.all()
+        }
+        return render(request, 'galeri.html', context)
+
+    user_arti = UserArti.objects.get(user=loggedin_user)
+    objects = Karya.objects.filter(kategori=user_arti.kategori_favorit)
     context = {
         'user' : loggedin_user,
         'karyas' : objects
     }
-    return render(request, 'index.html', context)
+
+    return render(request, 'galeri.html', context)
 
 def login_user(request):
     if request.user:
@@ -46,12 +59,14 @@ def register(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            new_user = form.save()
+            new_kategori = request.POST.get('kategori')
+            new_user_arti = UserArti(user = new_user, kategori_favorit = new_kategori)
+            new_user_arti.save()
             messages.success(request, 'Akun telah berhasil dibuat!')
             return redirect('arti:login')
-    
-    context = {'form':form}
-    return render(request, 'register.html', context)
+
+    return render(request, 'register.html', {'form': form})
 
 @login_required(login_url='/login')
 def logout_user(request):
@@ -63,7 +78,6 @@ def logout_user(request):
 
 @login_required(login_url='/login')
 def post_karya(request):
-    submitted = False
     if request.method == 'POST':
         form = FormKarya(request.POST, request.FILES)
         if form.is_valid():
@@ -78,3 +92,9 @@ def post_karya(request):
 
     # Tampilkan form baru
     return render(request, 'post-karya.html', {'form': form})
+
+@login_required(login_url='/login')
+def delete_karya(request, karya_id):
+    karya_dihapus = Karya.objects.get(pk = karya_id)
+    karya_dihapus.delete()
+    return HttpResponse("success")

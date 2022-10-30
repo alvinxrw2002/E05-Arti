@@ -6,22 +6,46 @@
 {% endblock meta %}
 
 {% block content %}
-<nav class="navbar">
-    <a href="{% url 'arti:post_karya' %}" class="btn btn-primary">Post Karya</a>
-    <a href="{% url 'arti:logout' %}" class="btn btn-danger">Logout</a>
-</nav>
-<h1>Hello, {{ user }}!</h1>
-<h3>ini buat halaman utamanya ya, gess</h3>
 
-<div class="row">
-    {% for karya in karyas %}
-    <div id="{{ karya.id }}" class="col-sm-12">
-        <div class="card text-center">
-            <div class="card-body">
-                <img src="{{ karya.karya_image }}">
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'arti:index' %}">ARTi</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link" href="{% url 'arti:post_karya' %}">Post Karya</a>
+                <a class="nav-link" href="{% url 'arti:galeri' %}">Galeri</a>
+                <a class="nav-link" href="leaderboard/">Leaderboard</a>
+                <a class="nav-link" href="profileuser/">Profile User</a>
             </div>
         </div>
-    </div>`
-    {% endfor %}
-</div>
+    </div>
+    {% if user.is_superuser %}
+    <a href="admin/" class="btn btn-outline-success">Admin</a>
+    {% endif %}
+    <a class="btn btn-outline-danger" href="{% url 'arti:logout' %}">Logout</a>
+</nav>
+
+<h1>Hello, {{ user }}!</h1>
+<h3>selamat datang di ARTi</h3>
+
+<p>
+    Website dengan nama ARTi ini merupakan wadah untuk setiap orang yang memiliki keinginan untuk membantu masyarakat
+    luas yang mengalami kesulitan akibat suatu penyakit, musibah, maupun ekonomi. Selain memberikan layanan bantuan,
+    website kami juga memberikan sarana untuk setiap orang yang ingin berkarya dengan meng-upload karya terbaik mereka
+    yang nantinya akan dipromosikan dan dapat diperjualbelikan, lalu dana yang terkumpul digunakan untuk berdonasi bagi
+    mereka yang membutuhkan.
+</p>
+
+<p>
+    Dengan membeli karya di situs ini, anda telah membantu masyarakat yang mengalami kesulitan sebagai bentuk dari
+    empati dan memberikan rasa suka cita sekaligus mewujudkan bentuk kasih sayang kepada sesama. Bantuan diberikan dalam
+    bentuk uang yang terkumpul dari layanan
+    donasi. Selain itu, memberi ruang untuk setiap orang berekspresi melalui karya-karyanya. Manfaat berdonasi juga
+    sangat banyak, tidak hanya bagi orang yang menerima tetapi juga bagi orang yang melakukannya.
+</p>
+
 {% endblock content %}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Main</title>
+{% endblock meta %}
+
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'js/galeri.js' %}"></script>
+
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'arti:index' %}">ARTi</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link" href="{% url 'arti:post_karya' %}">Post Karya</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'arti:galeri' %}">Galeri</a>
+                <a class="nav-link" href="leaderboard/">Leaderboard</a>
+                <a class="nav-link" href="profileuser/">Profile User</a>
+            </div>
+        </div>
+    </div>
+    {% if user.is_superuser %}
+    <a href="admin/" class="btn btn-outline-success">Admin</a>
+    {% endif %}
+    <a class="btn btn-outline-danger" href="{% url 'arti:logout' %}">Logout</a>
+</nav>
+
+<h3>Galeri</h3>
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        {% for karya in karyas %}
+        <div id="{{ karya.id }}" class="col-sm-4">
+            <div id="hvr-sweep-to-right" class="card h-100" style="margin: 15px 0;">
+                <img src="{{ karya.gambar }}" class="card-img-top">
+                <div class="card-body">
+                    <p class="card-text">{{ karya.judul }}</p>
+                    <h5 class="card-title">Rp{{ karya.harga }}</h5>
+                    <p class="card-text">{{ karya.deskripsi }}</p>
+                </div>
+
+                {% if karya.user == user or user.is_superuser %}
+                    <div class="card-footer text-center">
+                        by you ({{karya.tanggal}})<br>
+                        <button class="btn btn-outline-danger btn-lg" onclick="hapusKarya('{{ karya.id }}')">Hapus</button>
+                    </div>
+                {% else %}
+                    <div class="card-footer text-center">
+                        by {{karya.user}} ({{karya.tanggal}})
+                        <a href="#" class="btn btn-outline-warning btn-lg">Beli</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}
