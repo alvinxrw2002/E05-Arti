@@ -48,11 +48,29 @@
                                 <label class="form-label" for="form3Example4">Confirm password</label>
                             </div>
 
+                            <!-- Password confirmation input -->
+                            <div class="form-outline mb-4">
+                                <select name="kategori" width="50px">
+                                    <option value="abstract">abstract</option>
+                                    <option value="cartoon">cartoon</option>
+                                    <option value="collage">collage</option>
+                                    <option value="doodle">doodle</option>
+                                    <option value="drawing">drawing</option>
+                                    <option value="hologram">hologram</option>
+                                    <option value="life drawing">life drawing</option>
+                                    <option value="scribbles">scribbles</option>
+                                    <option value="silhoutte">silhoutte</option>
+                                    <option value="sketch">sketch</option>
+                                </select>
+                                <br>
+                                <label class="form-label" for="form3Example4">Select your category preferrence</label>
+                            </div>
+
                             <div class="h-100 d-flex align-items-center justify-content-center">
                                 <div>
-                                {% for field in form %}
-                                    {{ field.errors }}
-                                {% endfor %}
+                                    {% for field in form %}
+                                        {{ field.errors }}
+                                    {% endfor %}
                                 </div>
                             </div>
 
@@ -62,7 +80,7 @@
                                 </button>
                             </div>
 
-                            <div>Already have an acccount?<a href="{% url 'arti:login' %}">Sign in</a></div>
+                            <div>Already have an acccount? <a href="{% url 'arti:login' %}">Sign in</a></div>
                         </form>
                     </div>
                 </div>

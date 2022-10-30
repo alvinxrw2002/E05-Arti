@@ -18,13 +18,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='karya',
             name='deskripsi',
-            field=models.CharField(default='nonononon', max_length=10000),
+            field=models.CharField(max_length=10000),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='karya',
             name='judul',
-            field=models.CharField(default='ononoonnono', max_length=255),
+            field=models.CharField(max_length=255),
             preserve_default=False,
         ),
         migrations.AlterField(
