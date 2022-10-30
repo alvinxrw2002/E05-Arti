@@ -6,6 +6,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.http import HttpResponse
+from arti.models import Karya
 
 # Create your views here.
 # @login_required(login_url='/login/')
@@ -42,3 +43,10 @@ def leaderboard_pengguna(request):
         "users": users,
     }
     return render(request, "leaderboard_pengguna.html", context)
+
+def leaderboard_karya(request):
+    karya = Karya.objects.all()
+    context={
+        "karya": karya,
+    }
+    return render(request, "leaderboard_karya.html", context)
