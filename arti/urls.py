@@ -12,4 +12,8 @@ urlpatterns = [
     path('register', register, name='register'),
     path('logout', logout_user, name='logout'),
     path('post-karya', post_karya, name='post_karya'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('delete-karya/<karya_id>', delete_karya, name='delete_karya'),
+]
+
+if settings.DEBUG:  
+        urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT) 
