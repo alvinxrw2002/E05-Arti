@@ -4,9 +4,9 @@ from .models import Karya
 class FormKarya(ModelForm):
     class Meta:
         model = Karya
-        fields = ('karya_image', )
+        fields = ('gambar', )
         labels = {
-            'karya_image': '',
+            'gambar': '',
         }
         widgets = {
             

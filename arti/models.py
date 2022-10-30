@@ -4,4 +4,4 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Karya(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    karya_image = models.ImageField(upload_to="images/")
+    gambar = models.ImageField(upload_to="images/")
