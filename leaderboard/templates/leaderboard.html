@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+
+{% load static %}
+<title> Leaderboard </title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link href="{% static 'style_stenly.css' %}" rel="stylesheet">
+
+<script>
+    $(document).ready(function(){
+        $("#button_pengguna").click(function(){
+            $.ajax({
+                url: "{% url 'leaderboard:leaderboard_pengguna' %}",
+                type: "GET",
+                success: function(data){
+                    $("#leaderboard").html(data);
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock meta %}
+
+{% block content %}
+<!-- navbar   -->
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+    <a class="navbar-brand" href="#">Arti</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+            </a>
+            <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+        </li>
+        </ul>
+    </div>
+    </div>
+</nav>
+
+<!-- header -->
+<div class="row text-center justify-content-center" id="header">
+    <h1> Leaderboard </h1>
+</div>
+
+<!-- isi -->
+<div class="container-fluid pt-5 pb-5" style="background-color:rgb(245, 205, 96)">
+    <div class="row isi text-center"><h2> Choose Type </h2></div>
+    <div class="row isi row-cols-auto mb-5 justify-content-center">
+        <div class="col">
+            <button id="button_pengguna" class="btn btn-outline-dark btn-sm" style="margin:0.5%; border-radius:17px"> Pengguna </button>
+        </div>
+        <div class="col">
+            <button id="button_karya" class="btn btn-outline-dark btn-sm" style="margin:0.5%; border-radius:17px"> Karya </button>
+        </div>
+    </div>
+    <div class="row isi row-cols-auto justify-content-center"  style="min-height:300px">
+        <span class="border border-3" style="border-radius:20%;">
+            <div class="col text-center pt-5" id="leaderboard" style="min-width:300px">
+
+            </div>
+        </span>
+    </div>
+</div>
+
+<!-- comments -->
+<div class="container-fluid pt-5 pb-5" id="comments">
+    <div class="row text-center mb-2"> <h3> Comments </h3></div>
+    <div class="row justify-content-center mb-5" style="padding-top: 2px;">
+        <div class="col-9 col-sm-7 col-md-5">
+            <div id="commentsCarousel" class="carousel slide" data-bs-ride="carousel" style="background-color:rgba(249, 249, 249, 0); height: 250px">
+                <div class="carousel-inner justify-content-center text-center" id="comments_carousel">
+                    <!-- <div class="carousel-item active" style="border-radius: 20px;">
+                        <div class="card" style="height: 250px; background-color: rgb(231, 241, 240); border-radius: 20px">
+                            <div class="card-body">
+                              <h5 class="card-title">Card title</h5>
+                              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                              <a href="#" class="btn btn-outline-dark btn-sm">Button</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="card" style="height: 250px; background-color: rgb(231, 241, 240); border-radius: 20px;">
+                            <div class="card-body">
+                              <h5 class="card-title">Card title</h5>
+                              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                              <a href="#" class="btn btn-outline-dark btn-sm">Button</a>
+                            </div>
+                          </div>
+                    </div> -->
+                </div>
+                <script>
+                    $.ajax({
+                        type: "GET",
+                        url: "{% url 'leaderboard:change_comments'%}",
+                        success: function(data){
+                            $("#comments_carousel").html(data);
+                        }
+                    });
+                </script>
+                <button class="carousel-control-prev" type="button" data-bs-target="#commentsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#commentsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid pt-5 pb-5" style="background-color:rgb(236, 73, 83)" >
+    <div class="row text-center">
+        <h3> Send a Comment </h3>
+    </div>    
+
+    <form action= "{% url 'leaderboard:create_comment' %}"method="POST">
+        {% csrf_token %}
+        
+        <div class="row justify-content-center text-center">
+            <div class="col-auto mt-1">
+                {{ form }}
+            </div>
+        </div>
+        <div class="row mt-2 justify-content-center">
+            <div class="col-auto">
+                {% if has_authenticated %}
+                    <button type= "button" class="btn btn-outline-dark btn-sm"
+                        id="form_button_success" 
+                        style="border-radius: 17px;"> Submit </button>
+                    <script>
+                        $(document).ready(function(){
+                            $("#form_button_success").click(function(){
+                                if($("input").val() != ""){
+                                    $.ajax({
+                                        data: {
+                                            'csrfmiddlewaretoken': "{{ csrf_token }}",
+                                            'text': $("textarea").val(),
+                                        },
+                                        type: "POST",
+                                        url: "{% url 'leaderboard:create_comment' %}",
+                                    });
+                                    alert("Berhasil menambahkan comment baru!");
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "{% url 'leaderboard:change_comments'%}",
+                                        success: function(data){
+                                            $("#comments_carousel").html(data);
+                                        }
+                                    });
+                                }
+                                else{
+                                    alert("Text field tidak boleh kosong!")
+                                }
+                            });
+                        });
+                    </script>
+                {% else %}
+                    <button type= "button" class="btn btn-outline-dark btn-sm"
+                        id="form_button_failed"
+                        style="border-radius:17px"> Submit </button>
+                    <script>
+                        $(document).ready(function(){
+                            $("#form_button_failed").click(function(){
+                                alert("Silahkan login terlebih dahulu");
+                            });
+                        });
+                    </script>
+                {% endif %}
+            </div>
+    </form>
+</div>
+
+
+{% endblock content %}
