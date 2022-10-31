@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
                 ('judul', models.CharField(max_length=255)),
                 ('kategori', models.CharField(max_length=255)),
                 ('harga', models.CharField(max_length=255)),
-                ('deskripsi', models.CharField(max_length=10000)),
+                ('deskripsi', models.BigIntegerField()),
                 ('tanggal', models.DateField(auto_now_add=True)),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
