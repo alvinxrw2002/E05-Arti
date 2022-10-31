@@ -13,5 +13,5 @@ class Karya(models.Model):
     tanggal = models.DateField(auto_now_add=True)
 
 class UserArti(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     kategori_favorit = models.CharField(max_length=255)
