@@ -22,6 +22,7 @@ urlpatterns = [
     path('', include('arti.urls')),
     path('leaderboard/', include('leaderboard.urls')),
     path('profileuser/', include('profileuser.urls')),
+    path('riwayat/', include('riwayat.urls')),
 
 ]
 if settings.DEBUG:  

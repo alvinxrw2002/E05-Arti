@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- {% comment %} 
+{% block content %}
+<h1>{{nama}}</h1>
+
+<table>
+    <tr>
+    <th>Nama Donasi</th>
+    <th>Deskripsi</th>
+    </tr>
+    Tambahkan data di bawah baris ini 
+    {% for karya in nama_donasi %}
+    <tr>
+        <th>{{karya.nama_donasi}}</th>
+        <th>{{karya.deskripsi}}</th>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %} 
+{% endcomment %} -->
+
+{% block headone %}
+<title>Riwayat</title>
+<!-- <link rel='stylesheet' href="{% static '/css/riwayat.css' %}" type='text/css'> -->
+<link rel="stylesheet" href="{% static '/css/static.css' %}">
+<script src="{% static '/js/pesan.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+
+<!-- Bagian Riwayat -->
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-12">
+
+            <div></div>
+            <h1 class="judulListDonatur center">Donasi Terkumpul</h1>
+            <br>
+                <div class="container">
+                    {% if donasi_terkumpul.donatur.all.count == 0 %}
+                    <h3 class="belum-ada center">Belum ada donasi terkumpul</h3>
+                    {% else %}
+                    <table class="table table-striped table-bordered" style="text-align: center;">
+                        <thead>
+                            <tr>
+                                <th scope="col" >Nama Donatur </th>
+                                <th scope="col">Donasi Terkumpul</th>
+                            </tr>
+                        </thead>
+
+                        {% for data in donasi_terkumpul.donatur.all %}
+                        {% if data == donasi_terkumpul.donatur.last %}
+                        <tr>
+                            <td scope="row">{{ data.nama }}</td>
+                            <td scope="row">{{ data.jmldonasi }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td scope="row">{{ data.nama }}</td>
+                            <td scope="row">{{ data.jmldonasi }}</td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </table>
+                    {% endif %}
+                </div>
+            <br>
+        </div>
+
+    </div>
+</div>
+<div style="height: 50px;"></div>
+
+
+
+<!-- Bagian Pesan -->
+<div class="container-tulisan">
+    <div class="bagian-text" id="divpesan">
+        <p class="judul-pesan">Pesan</p>
+        <div class="row" id="kumpulan-pesan">
+            {% for pesan in pesans %}
+            <div class="col-md-4 mb-4">
+                <div class="card" style="height: 300px; margin-top: 20px; margin-left: 35px;">
+                    <div class="card-body">
+                        <div class="pesan-textfield">
+                            <p style="padding-top: 30px;">{{ pesan.isi }}</p>
+                        </div>
+                        <div class="pesan-nama">
+                            <p style="right: 100px; position: absolute;">- {{ pesan.nama }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="bagian-text">
+        {%if user.is_authenticated%}
+        <p class="judul-pesan">Berikan Pesan</p>
+        <!-- <form action="/pesan/" method="POST"> -->
+        
+            {% csrf_token %}
+            <p>
+                <textarea name="isi" cols="40" rows="10" class="form-control" maxlength="100"
+                    placeholder="Masukkan pesan anda" required="" id="id_isi"></textarea>
+            </p>
+            <p id="lettercount"></p>
+            <div class="kananin">
+                <button class="btn btn-primary rounded-pill btn-donasi" id="tombol-kirim">Kirim</button>
+            </div>
+
+        <!-- </form> -->
+        {% else %}
+        <p class="judul-pesan" style="font-size: 30px; color: black;"><a href="/login/">login</a> untuk memberikan
+            pesan</p>
+        {% endif %}
+    </div>
+</div>
+
+
+<!-- uwu -->
+{% endblock %}

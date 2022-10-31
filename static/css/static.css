@@ -1,0 +1,209 @@
+
+
+body {
+    background: #E5E5E5;
+    font-family: 'Poppins', sans-serif;
+    max-width: 100%;
+    overflow-x: hidden;
+    margin-right: 0;
+    
+}
+
+.navbar {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    color: #FFFFFF;
+}
+
+.navbar li {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+/* 
+#gambar-atas {
+    height: 720px;
+    background: url("../img/gambar_atas_about.png") no-repeat;
+    background-size:cover; 
+    background-position: center center;
+} */
+
+
+.judul {
+    font-family: Josefin Sans;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 110%;
+    font-size: 80px;
+    text-align: center;
+    color: #ffffff;
+    padding-top: 20vw;
+    
+}
+
+.deskripsiJudul {
+    /* font-family: Josefin Sans; */
+    font-style: normal;
+    /* font-weight: bold;
+    line-height: 110%; */
+    font-size: 24px;
+    text-align: center;
+    color: #ffffff;
+    
+}
+
+.judul-pesan {
+    font-family: Josefin Sans;
+    font-weight: bold;
+    font-size: 60px;
+    color: #024164;
+    /* padding-bottom: 2.344vw ; */
+}
+
+.penjelasan {
+    font-family: Poppins;
+    font-size: 26px;
+}
+
+.center {
+  /* height:29vh; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.bagian-text {
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 110px;
+    /* border: 1px solid red; */
+}
+
+.container-tulisan {
+    padding-bottom: 40px;
+    /* border: 10px solid red; */
+}
+
+.card {
+    border-radius: 10% !important;
+
+}
+
+.card-img-top {
+    border-top-left-radius: 10%; 
+    border-top-right-radius: 10% ;
+}
+
+/* .btn {
+    background-color: skyblue;
+     */
+/* } */
+
+.btn-donasi {
+    color: #ffffff; 
+    width: 150px;
+    margin: 4px;
+}
+
+.nama-reviewer {
+    font-size: 30px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    text-align: right;
+    color: #000000;
+    bottom: 0;  
+}
+
+.pesan-textfield{
+    position: absolute;
+    width: 75%;
+    height: 250px;
+    
+
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 27px;
+    margin-left: 40px;
+    margin-right: 30px;
+    color: #000000;
+
+    /* border: 2px solid red; */
+}
+
+.pesan-nama{
+    position: absolute;
+    width: 75%;
+    height: 95px;
+    bottom: 0;
+    right: 0;
+
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 45px;
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+    margin-right: 30px;
+    margin-left: 30px;
+
+    color: #000000;
+
+
+    /* border: 2px solid blue; */
+}
+
+.kananin{
+    display: flex;
+    justify-content: flex-end;
+    align-items: right;
+}
+
+.judulListDonatur {
+    font-family: Josefin Sans;
+    font-weight: bold;
+    font-size: 60px;
+    color: #024164;
+    margin-top: 90px;
+}
+
+.namaProgramListDonatur {
+    font-family: Josefin Sans;
+    margin-bottom: 50px;
+    color: #772E25;
+}
+
+.judulDonasiBerhasil {
+    font-family: Josefin Sans;
+    font-weight: bold;
+    font-size: 60px;
+    color: #024164;
+    margin-top: 150px;
+    margin-bottom: 20px;
+}
+
+.judulProgramFormulir {
+    font-family: Josefin Sans;
+    font-weight: bold;
+    font-size: 33px;
+    color: #024164;
+    margin-top: 40px;
+}
+
+.fotoDetailDonasi {
+    margin-top: 40px;
+    width: 80%;
+    border-radius: 20px;
+}
+
+.belum-ada{
+    font-size: 20px;
+    font-family: Josefin Sans;
+    background-color: #197278;
+    color: white;
+}
+
