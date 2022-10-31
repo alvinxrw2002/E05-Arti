@@ -1,3 +1,12 @@
+body {
+    background-image: url('/static/img/papers.co-vt06-abstract-art-color-basic-background-pattern-40-wallpaper.jpg');
+    min-height: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+
 .btn {
     margin-left: 20px;
     line-height: 35px;

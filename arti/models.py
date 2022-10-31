@@ -8,7 +8,7 @@ class Karya(models.Model):
     gambar = models.ImageField(upload_to="images/")
     judul = models.CharField(max_length=255)
     kategori = models.CharField(max_length=255)
-    harga = models.CharField(max_length=255)
+    harga = models.BigIntegerField()
     deskripsi = models.CharField(max_length=10000)
     tanggal = models.DateField(auto_now_add=True)
 
