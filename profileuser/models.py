@@ -13,5 +13,6 @@ class Profile(models.Model):
     finish = models.BooleanField(default=False)
 
 class UploadImage(models.Model): 
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True) 
     image = models.ImageField(upload_to='images')  
    
