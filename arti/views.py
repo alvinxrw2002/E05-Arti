@@ -6,6 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from .models import Karya, UserArti
 from .forms import FormKarya
 
@@ -28,6 +29,7 @@ def galeri(request):
     objects = Karya.objects.filter(kategori=user_arti.kategori_favorit)
     context = {
         'user' : loggedin_user,
+        'user_arti' : user_arti,
         'karyas' : objects
     }
 
@@ -84,7 +86,7 @@ def post_karya(request):
             karya = form.save(commit=False)
             karya.user = request.user
             karya.save()
-            return redirect('arti:index')
+            return redirect('arti:galeri')
 
     # jika method-nya GET atau yang lainnya, buat form kosong
     else:
@@ -96,5 +98,18 @@ def post_karya(request):
 @login_required(login_url='/login')
 def delete_karya(request, karya_id):
     karya_dihapus = Karya.objects.get(pk = karya_id)
+    if karya_dihapus.gambar:
+        karya_dihapus.gambar.delete()
     karya_dihapus.delete()
+    return HttpResponse("success")
+
+@login_required(login_url='/login')
+@csrf_exempt
+def edit_karya(request, karya_id):
+    karya_edit = Karya.objects.get(pk = karya_id)
+    karya_edit.judul = request.POST["judul"]
+    karya_edit.kategori = request.POST["kategori"]
+    karya_edit.harga = request.POST["harga"]
+    karya_edit.deskripsi = request.POST["deskripsi"]
+    karya_edit.save()
     return HttpResponse("success")

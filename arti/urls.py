@@ -13,4 +13,5 @@ urlpatterns = [
     path('logout', logout_user, name='logout'),
     path('post-karya', post_karya, name='post_karya'),
     path('delete-karya/<karya_id>', delete_karya, name='delete_karya'),
+    path('edit-karya/<karya_id>', edit_karya, name='edit_karya'),
 ]
