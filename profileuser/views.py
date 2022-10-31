@@ -16,7 +16,7 @@ from arti.models import *
 @login_required(login_url='/login')
 def show_profile(request):
     profile = Profile.objects.last()
-    profileimg = UploadImage.objects.filter(user=request.user).last()
+    profileimg = UploadImage.objects.last()
     profileimg2 = Karya.objects.filter(user=request.user)
 
     template = loader.get_template('profile.html')
@@ -82,7 +82,7 @@ def image_request(request):
 @login_required(login_url='/login')
 def show_ajax_profile(request):
     profile = Profile.objects.last()
-    profileimg = UploadImage.objects.filter(user=request.user).last()
+    profileimg = UploadImage.objects.last()
     profileimg2 = Karya.objects.filter(user=request.user)
     template = loader.get_template('edit_ajax_profile.html')
 
