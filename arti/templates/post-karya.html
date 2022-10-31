@@ -1,43 +1,49 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block meta %}
 <title>Post Karya</title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/post-karya.css' %}">
 {% endblock meta %}
 
 {% block content %}
-<nav class="navbar navbar-expand-lg bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'arti:index' %}">ARTi</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="{% url 'arti:post_karya' %}">Post Karya</a>
-                <a class="nav-link" href="{% url 'arti:galeri' %}">Galeri</a>
-                <a class="nav-link" href="leaderboard/">Leaderboard</a>
-                <a class="nav-link" href="profileuser/">Profile User</a>
-            </div>
-        </div>
+<nav>
+    <a href="{% url 'arti:index' %}">ARTi</a>
+    <a href="{% url 'arti:post_karya' %}">Post Karya</a>
+    <a href="{% url 'arti:galeri' %}">Galeri</a>
+    <a href="leaderboard/">Leaderboard</a>
+    <a href="profileuser/">Profile User</a>
+    <div class="topnav-right">
+        {% if user.is_superuser %}
+        <a class="btn btn-success" href="admin/">Admin</a>
+        {% endif %}
+        <a class="btn btn-danger" href="{% url 'arti:logout' %}">Logout</a>
     </div>
-    {% if user.is_superuser %}
-    <a href="admin/" class="btn btn-outline-success">Admin</a>
-    {% endif %}
-    <a class="btn btn-outline-danger" href="{% url 'arti:logout' %}">Logout</a>
+    <div class="animation start-home"></div>
 </nav>
 
-<div class="d-flex align-items-center justify-content-center">
-    <div>
-        <h1>Unggah karyamu disini</h1>
-        <br>
-        <form method="POST" action="" enctype="multipart/form-data">
-            {% csrf_token %}
-            
-            {{ form.as_p }}
+<div class="container px-4 py-3 px-md-5 text-center text-lg-start my-2">
+    <div class="row d-flex justify-content-center align-items-center">
 
-            <input type="submit" value="Post Karya" class="btn btn-outline-primary">
-        </form>
+        <div class="col-lg-8 position-relative">
+            <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+            <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+
+            <div class="card bg-glass">
+                <h1 class="text-center">Unggah karyamu disini</h1>
+                <div class="card-body px-4 py-5 px-md-5 text-center">
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        {{ form.as_p }}
+            
+                        <input type="submit" value="Post Karya" class="btn btn-outline-primary">
+                    </form>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 {% endblock content %}
