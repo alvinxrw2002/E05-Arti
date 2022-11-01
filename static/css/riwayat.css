@@ -1,10 +1,9 @@
 body {
-    background: #E5E5E5;
+    background-image: url('/static/img/bg-index.jpg');
     font-family: 'Poppins', sans-serif;
     max-width: 100%;
     overflow-x: hidden;
     margin-right: 0;
-    
 }
 
 .btn {
@@ -56,7 +55,6 @@ nav a:nth-child(2) {
     width: 110px;
 }
 
-nav .start-home,
 a:nth-child(2):hover~.animation {
     width: 110px;
     left: 100px;
@@ -97,9 +95,10 @@ nav a:nth-child(6) {
     width: 120px;
 }
 
+nav .start-home,
 nav a:nth-child(6):hover~.animation {
     width: 120px;
-    left: 440px;
+    left: 560px;
 }
 
 .topnav-right {
@@ -116,14 +115,6 @@ nav a:nth-child(6):hover~.animation {
     padding-right: 10px;
     padding-left: 10px;
 }
-/* 
-#gambar-atas {
-    height: 720px;
-    background: url("../img/gambar_atas_about.png") no-repeat;
-    background-size:cover; 
-    background-position: center center;
-} */
-
 
 .judul {
     font-family: Josefin Sans;
@@ -215,7 +206,7 @@ nav a:nth-child(6):hover~.animation {
 .pesan-textfield{
     position: absolute;
     width: 75%;
-    height: 250px;
+    /* height: 250px; */
     
 
     font-family: Poppins;

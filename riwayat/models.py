@@ -8,12 +8,3 @@ class Pesan(models.Model):
 
     def __str__(self):
         return self.nama
-
-class Program(models.Model):
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
-    total_donasi = models.IntegerField(null=True)
-    # name   = models.CharField(max_length=200)
-    # donatur = models.ManyToManyField(Donasi, blank=True)
-
-# class Update(models.Model):
-#     donatur = models.ManyToManyField(DonasiAPD, blank=True)

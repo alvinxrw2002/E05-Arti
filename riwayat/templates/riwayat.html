@@ -6,39 +6,35 @@
 <link rel="stylesheet" type="text/css" href="{% static '/css/riwayat.css' %}">
 {% endblock %}
 
-
 {% block content %}
-
+<body>
 <!-- Navbar -->
 <nav>
     <a href="{% url 'arti:index' %}">ARTi</a>
     <a href="{% url 'arti:post_karya' %}">Post Karya</a>
     <a href="{% url 'arti:galeri' %}">Galeri</a>
-    <a href="leaderboard/">Leaderboard</a>
-    <a href="profileuser/">Profile User</a>
-    <a href="#">Riwayat</a>
+    <a href="{% url 'leaderboard:show_leaderboard' %}">Leaderboard</a>
+    <a href="{% url 'profileuser:show_profile' %}">Profile User</a>
+    <a href="#riwayat">Riwayat</a>
     <div class="topnav-right">
         {% if user.is_superuser %}
-        <a class="btn btn-success" href="admin/">Admin</a>
+        <a class="btn btn-success" href="{% url 'admin:index' %}">Admin</a>
         {% endif %}
         <a class="btn btn-danger" href="{% url 'arti:logout' %}">Logout</a>
     </div>
     <div class="animation start-home"></div>
 </nav>
 
-<!-- Bagian Riwayat -->
+<!-- Bagian Donasi Terkumpul -->
 <div class="container-fluid">
     <div class="row content">
         <div class="col-sm-12">
-
-            <div></div>
-            <h1 class="judulDanaTerkumpul center">Donasi Terkumpul</h1>
-            <br>
+            <h1 class="judulDanaTerkumpul center" style="text-align: center;">Donasi Terkumpul</h1>
                 <div class="container">
-                    {% if donasi_terkumpul.donatur.all.count == 0 %}
+                    {% if jumlahDonasi == 0 %}
                     <h3 class="belum-ada center">Belum ada donasi terkumpul</h3>
                     {% else %}
-                    <h3 class="danaTerkumpul center">Rp. {{ donasi_terkumpul }}</h3>
+                    <h3 class="danaTerkumpul center">Rp. {{ jumlahDonasi }}</h3>
                     {% endif %}
                 </div>
             <br>
@@ -46,14 +42,31 @@
 
     </div>
 </div>
-<div style="height: 50px;"></div>
+<div style="height: 50px;" id="riwayat"></div>
 
 
 <!-- Bagian Pesan -->
 <script>
     $(document).ready(function(){
-        
-    
+
+        $.ajax({url: "pesanajax?q=", success: function(result){
+            console.log(result);
+
+            $("#divpesan").empty();
+            $("#id_isi").val("");
+            $("#lettercount").empty();
+
+            $("#divpesan").append("<p class=\"judul-pesan\">Pesan</p>")
+            $("#divpesan").append('<div class="row" id="kumpulan-pesan"></div>')
+            var i;
+            for (i = 0; i < result.length; i++){
+                var isiPesan = result[i].fields.isi;
+                var nama = result[i].fields.nama;
+                // alert(isiPesan + nama);
+                $("#kumpulan-pesan").append('<div class="col-lg-4 mb-4 col-12"> <div class="card" style="min-height: 200px;"><div class="card-body"><div class="pesan-textfield"><p style="padding-top: 10px;">' +isiPesan+ '</p></div><div class="pesan-nama"><p style="right: 0; position: absolute;">-' +nama+ '</p></div></div></div></div>')
+            }
+        }});
+
         $("#id_isi").keyup(function(){
             //character count isi txt area pesan
     
@@ -71,7 +84,6 @@
             
         });
     
-    
         $("#tombol-kirim").click(function(){
             //ajax untuk simpan pesan dan nampilin pesan yg baru dimasukkin tsb.
     
@@ -88,11 +100,11 @@
                     $("#divpesan").append("<p class=\"judul-pesan\">Pesan</p>")
                     $("#divpesan").append('<div class="row" id="kumpulan-pesan"></div>')
                     var i;
-                    for (i=0; i<result.length; i++){
+                    for (i = 0; i < result.length; i++){
                         var isiPesan = result[i].fields.isi;
                         var nama = result[i].fields.nama;
                         // alert(isiPesan + nama);
-                        $("#kumpulan-pesan").append('<div class="col-md-4 mb-4"> <div class="card" style="height: 200px;"><div class="card-body"><div class="pesan-textfield"><p style="padding-top: 10px;">' +isiPesan+ '</p></div><div class="pesan-nama"><p style="right: 0; position: absolute;">-' +nama+ '</p></div></div></div></div>')
+                        $("#kumpulan-pesan").append('<div class="col-lg-4 mb-4 col-12"> <div class="card" style="min-height: 200px;"><div class="card-body"><div class="pesan-textfield"><p style="padding-top: 10px;">' +isiPesan+ '</p></div><div class="pesan-nama"><p style="right: 0; position: absolute;">-' +nama+ '</p></div></div></div></div>')
                     }
                 }});
             } else {
@@ -106,22 +118,6 @@
 <div class="container-tulisan">
     <div class="bagian-text" id="divpesan">
         <p class="judul-pesan">Pesan</p>
-        <div class="row" id="kumpulan-pesan">
-            {% for pesan in pesans %}
-            <div class="col-md-4 mb-4">
-                <div class="card" style="height: 300px; margin-top: 20px; margin-left: 35px;">
-                    <div class="card-body">
-                        <div class="pesan-textfield">
-                            <p style="padding-top: 30px;">{{ pesan.isi }}</p>
-                        </div>
-                        <div class="pesan-nama">
-                            <p style="right: 100px; position: absolute;">- {{ pesan.nama }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
     </div>
     <div class="bagian-text">
         {%if user.is_authenticated%}
@@ -145,7 +141,5 @@
         {% endif %}
     </div>
 </div>
-
-
-<!-- uwu -->
+</body>
 {% endblock %}

@@ -8,25 +8,26 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Pesan, Program
+from .models import Pesan
+from arti.models import Karya
 from django.http.response import JsonResponse
 import json
 
 # # Create your views here.
 @login_required(login_url='/login')
-def riwayat(request):
-    data_donasi = Program.objects.all()
-    context = {'data_donasi' : data_donasi}
-    return render(request, "riwayat.html", context)
-
-# Create your views here.
-
-def jml_donasi(request, program):
-    donasi_terkumpul = Program.objects.get(pk=program)
-    response = {
-        'donasi_terkumpul': donasi_terkumpul,
+def jml_donasi(request):
+    semuaKarya = Karya.objects.all()
+    jumlahDonasi = 0
+    Pesans = Pesan.objects.all()
+    for karya in semuaKarya:
+        if karya.sudah_dibeli == True:
+            jumlahDonasi += karya.harga
+    print(jumlahDonasi)
+    context = {
+        'jumlahDonasi': jumlahDonasi,
+        'Pesans':Pesans,
         }
-    return render(request, 'riwayat.html', response)
+    return render(request, 'riwayat.html', context)
 
 def pesan(request):
     username = 'anon'
@@ -56,7 +57,8 @@ def pesan(request):
 def pesanajax(request):
     argument = request.GET['q']
     username = request.user
-    Pesan.objects.create(nama=username, isi=argument)
+    if (argument != ""):
+        Pesan.objects.create(nama=username, isi=argument)
     datastr = serializers.serialize("json", Pesan.objects.all())
     data = json.loads(datastr)
 
