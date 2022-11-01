@@ -1,31 +1,40 @@
 from django.shortcuts import render
-from leaderboard.models import Review
+from leaderboard.models import Comment
 from django.contrib.auth.models import User
-from leaderboard.forms import ReviewForm
+from leaderboard.forms import CommentForm
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
+from django.http import HttpResponse
+from arti.models import Karya
 
 # Create your views here.
 # @login_required(login_url='/login/')
 def show_leaderboard(request):
-    new_form = ReviewForm()
-    reviews = Review.objects.all()
-    users = User.objects.all()
+    new_form = CommentForm()
+    comment = Comment.objects.all()
+    user = request.user
     context = {
-        'reviews': reviews,
-        'users' : users,
+        'comments': comment,
+        'has_authenticated' : user.is_authenticated,
         'form' : new_form,
     }
     return render(request, 'leaderboard.html', context)
     
-def create_review(request):
-    form = ReviewForm(request.POST)
+def create_comment(request):
+    form = CommentForm(request.POST)
     if form.is_valid():
-       review = form.save(commit=False)
-       review.user = request.user
-       review.save()
-    return redirect('leaderboard:show_leaderboard')
+       comment = form.save(commit=False)
+       comment.user = request.user
+       comment.save()
+    return HttpResponse('success')
+
+def change_comments(request):
+    comments = Comment.objects.all()
+    context = {
+        'comments': comments,
+    }
+    return render(request, 'comments_carousel.html', context)
 
 def leaderboard_pengguna(request):
     users = list(User.objects.all().order_by("pk"))
@@ -34,3 +43,10 @@ def leaderboard_pengguna(request):
         "users": users,
     }
     return render(request, "leaderboard_pengguna.html", context)
+
+def leaderboard_karya(request):
+    karya = Karya.objects.all()
+    context={
+        "karya": karya,
+    }
+    return render(request, "leaderboard_karya.html", context)

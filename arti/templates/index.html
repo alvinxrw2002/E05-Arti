@@ -1,27 +1,75 @@
 {% extends 'base.html' %}
+
 {% load static %}
 
 {% block meta %}
 <title>Main</title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
 {% endblock meta %}
 
 {% block content %}
-<nav class="navbar">
-    <a href="{% url 'arti:post_karya' %}" class="btn btn-primary">Post Karya</a>
-    <a href="{% url 'arti:logout' %}" class="btn btn-danger">Logout</a>
-</nav>
-<h1>Hello, {{ user }}!</h1>
-<h3>ini buat halaman utamanya ya, gess</h3>
+<script type="text/javascript" src="{% static 'js/index.js' %}"></script>
 
-<div class="row">
-    {% for karya in karyas %}
-    <div id="{{ karya.id }}" class="col-sm-12">
-        <div class="card text-center">
-            <div class="card-body">
-                <img src="{{ karya.karya_image }}">
+<nav>
+    <a href="#">ARTi</a>
+    <a href="{% url 'arti:post_karya' %}">Post Karya</a>
+    <a href="{% url 'arti:galeri' %}">Galeri</a>
+    <a href="leaderboard/">Leaderboard</a>
+    <a href="profileuser/">Profile User</a>
+    <div class="topnav-right">
+        {% if user.is_superuser %}
+        <a class="btn btn-success" href="admin/">Admin</a>
+        {% endif %}
+        <a class="btn btn-danger" href="{% url 'arti:logout' %}">Logout</a>
+    </div>
+    <div class="animation start-home"></div>
+</nav>
+
+<div class="heading text-center text-white">
+    <h1>Hello, {{ user }}!</h1>
+    <h3>selamat datang di ARTi</h3>
+</div>
+
+<section>
+    <div class="container reveal">
+        <h2 class="text-white">Apa itu ARTi?</h2>
+        <div class="text-container">
+            <div class="text-box">
+                <p>
+                    Website dengan nama ARTi ini merupakan wadah untuk setiap orang yang memiliki keinginan untuk membantu
+                    masyarakat
+                    luas yang mengalami kesulitan akibat suatu penyakit, musibah, maupun ekonomi. Selain memberikan layanan
+                    bantuan,
+                    website kami juga memberikan sarana untuk setiap orang yang ingin berkarya dengan meng-upload karya
+                    terbaik mereka
+                    yang nantinya akan dipromosikan dan dapat diperjualbelikan, lalu dana yang terkumpul digunakan untuk
+                    berdonasi bagi
+                    mereka yang membutuhkan.
+                </p>
             </div>
         </div>
-    </div>`
-    {% endfor %}
-</div>
+    </div>
+</section>
+
+<section>
+    <div class="container reveal">
+        <h2 class="text-white">Mengapa harus ARTi?</h2>
+        <div class="text-container">
+            <div class="text-box">
+                <p>
+                    Dengan membeli karya di situs ini, anda telah membantu masyarakat yang mengalami kesulitan
+                    sebagai bentuk dari
+                    empati dan memberikan rasa suka cita sekaligus mewujudkan bentuk kasih sayang kepada sesama. Bantuan
+                    diberikan
+                    dalam
+                    bentuk uang yang terkumpul dari layanan
+                    donasi. Selain itu, memberi ruang untuk setiap orang berekspresi melalui karya-karyanya. Manfaat
+                    berdonasi juga
+                    sangat banyak, tidak hanya bagi orang yang menerima tetapi juga bagi orang yang melakukannya.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
 {% endblock content %}
