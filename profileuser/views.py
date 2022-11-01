@@ -15,8 +15,8 @@ from arti.models import *
 
 @login_required(login_url='/login')
 def show_profile(request):
-    profile = Profile.objects.last()
-    profileimg = UploadImage.objects.last()
+    profile = Profile.objects.filter(user=request.user).last()
+    profileimg = UploadImage.objects.filter(user=request.user).last()
     profileimg2 = Karya.objects.filter(user=request.user)
 
     template = loader.get_template('profile.html')
@@ -50,6 +50,7 @@ def show_edit_profile(request):
     mobile1 = request.POST['mobile']
     address1 = request.POST['address']
     profile1 = Profile(
+        user=request.user,
         username = username1,
         email = email1,
         phone = phone1,
@@ -63,7 +64,8 @@ def show_edit_profile(request):
 def image_request(request):  
     if request.method == 'POST':  
         form = UserImageForm(request.POST, request.FILES)  
-        if form.is_valid():  
+        if form.is_valid():
+            form.instance.user = request.user  
             form.save()  
   
             # Getting the current instance object to display in the template  
@@ -81,8 +83,8 @@ def image_request(request):
 
 @login_required(login_url='/login')
 def show_ajax_profile(request):
-    profile = Profile.objects.last()
-    profileimg = UploadImage.objects.last()
+    profile = Profile.objects.filter(user=request.user).last()
+    profileimg = UploadImage.objects.filter(user=request.user).last()     
     profileimg2 = Karya.objects.filter(user=request.user)
     template = loader.get_template('edit_ajax_profile.html')
 
