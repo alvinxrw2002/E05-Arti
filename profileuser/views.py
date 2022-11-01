@@ -95,6 +95,7 @@ def show_ajax_profile(request):
     }
     return HttpResponse(template.render(context, request))
 
+    
 
 
 
