@@ -1,9 +1,9 @@
-#ART{
+#ART {
     color: hsl(218, 81%, 95%);
     font-family: Snell Roundhand, cursive;
 }
 
-#lebih{
+#lebih {
     color: hsl(304, 96%, 45%);
     font-family: Brush Script MT, Brush Script Std, cursive;
 }
@@ -25,4 +25,5 @@ body {
 .bg-glass {
     background-color: hsla(0, 0%, 100%, 0.9) !important;
     backdrop-filter: saturate(200%) blur(25px);
+    border-radius: 25px;
 }

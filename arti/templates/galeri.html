@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block meta %}
+<title>Galeri</title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/galeri.css' %}">
+{% endblock meta %}
+
+{% block content %}
+<script type="text/javascript" src="{% static 'js/galeri.js' %}"></script>
+<script>
+    function editKarya(idData) {
+        let judulBaru = $("#judul-baru").val();
+        let kategoriBaru = $("#kategori-baru").val();
+        let hargaBaru = $("#harga-baru").val();
+        let deskripsiBaru = $("#deskripsi-baru").val();
+        document.querySelector('#form-edit-karya').reset();
+        $.ajax({
+            type: "POST",
+            url: `/edit-karya/${idData}`,
+            data: {
+                'judul': judulBaru,
+                'kategori': kategoriBaru,
+                'harga': hargaBaru,
+                'deskripsi': deskripsiBaru,
+            },
+            success: function () {
+                $(`#${idData}-judul`).text(judulBaru);
+                $(`#${idData}-kategori`).text(kategoriBaru);
+                $(`#${idData}-harga`).text("Rp" + hargaBaru);
+                $(`#${idData}-deskripsi`).text(deskripsiBaru);
+            }
+        });
+    }
+</script>
+
+<nav>
+    <a href="{% url 'arti:index' %}">ARTi</a>
+    <a href="{% url 'arti:post_karya' %}">Post Karya</a>
+    <a href="#">Galeri</a>
+    <a href="leaderboard/">Leaderboard</a>
+    <a href="profileuser/">Profile User</a>
+    <div class="topnav-right">
+        {% if user.is_superuser %}
+        <a class="btn btn-success" href="admin/">Admin</a>
+        {% endif %}
+        <a class="btn btn-danger" href="{% url 'arti:logout' %}">Logout</a>
+    </div>
+    <div class="animation start-home"></div>
+</nav>
+
+{% if not user.is_superuser %}
+<h1>Kategori favoritmu: {{ user_arti.kategori_favorit }}</h1>
+{% endif %}
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        {% for karya in karyas %}
+        <div id="{{ karya.id }}" class="col-sm-4">
+            <div id="hvr-sweep-to-right" class="card h-100" style="margin: 15px 0;">
+                {% if user.is_superuser %}
+                <p class="text-center text-white" style="background-color: purple; border-radius: 4px;">{{ karya.kategori }}</p>
+                {% endif %}
+                <img src="{{ karya.gambar.url }}" class="card-img-top">
+                <div class="card-body">
+                    <p id="{{ karya.id }}-judul" class="card-text">{{ karya.judul }}</p>
+                    <h5 id="{{ karya.id }}-harga" class="card-title">Rp{{ karya.harga }}</h5>
+                    <p id="{{ karya.id }}-deskripsi" class="card-text">{{ karya.deskripsi }}</p>
+                </div>
+
+                {% if karya.user == user or user.is_superuser %}
+                <div class="card-footer text-center">
+                    by you ({{karya.tanggal}})<br>
+                    <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">Edit</button>
+                    <button class="btn btn-outline-danger" onclick="hapusKarya('{{ karya.id }}')">Hapus</button>
+                </div>
+                {% else %}
+                <div class="card-footer text-center">
+                    by {{karya.user}} ({{karya.tanggal}})
+                    <a href="#" class="btn btn-outline-info btn-lg">Beli</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form-edit-karya" method="POST">
+                            {% csrf_token %}
+                            <table>
+                                <tr>
+                                    <td><label>Judul</label></td>
+                                    <td><input id="judul-baru" type="text" name="judul"></input></td>
+                                </tr>
+                                <tr>
+                                    <td><label>Kategori</label></td>
+                                    <td>
+                                        <select id="kategori-baru" name="kategori">
+                                            <option value="abstract">abstract</option>
+                                            <option value="cartoon">cartoon</option>
+                                            <option value="collage">collage</option>
+                                            <option value="doodle">doodle</option>
+                                            <option value="drawing">drawing</option>
+                                            <option value="hologram">hologram</option>
+                                            <option value="life drawing">life drawing</option>
+                                            <option value="scribbles">scribbles</option>
+                                            <option value="silhoutte">silhoutte</option>
+                                            <option value="sketch">sketch</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label>Harga</label></td>
+                                    <td><input id="harga-baru" type="number" name="harga"></input></td>
+                                </tr>
+                                <tr>
+                                    <td><label>Deskripsi</label></td>
+                                    <td><textarea id="deskripsi-baru" name="deskripsi" rows="4" cols="50"></textarea>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                            onclick="editKarya('{{ karya.id }}')">Simpan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}

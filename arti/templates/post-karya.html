@@ -1,21 +1,49 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block meta %}
 <title>Post Karya</title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/post-karya.css' %}">
 {% endblock meta %}
 
 {% block content %}
+<nav>
+    <a href="{% url 'arti:index' %}">ARTi</a>
+    <a href="#">Post Karya</a>
+    <a href="{% url 'arti:galeri' %}">Galeri</a>
+    <a href="leaderboard/">Leaderboard</a>
+    <a href="profileuser/">Profile User</a>
+    <div class="topnav-right">
+        {% if user.is_superuser %}
+        <a class="btn btn-success" href="admin/">Admin</a>
+        {% endif %}
+        <a class="btn btn-danger" href="{% url 'arti:logout' %}">Logout</a>
+    </div>
+    <div class="animation start-home"></div>
+</nav>
 
-<div class="d-flex align-items-center justify-content-center">
-    <div>
-        <h1>Unggah karyamu disini</h1>
-        <form method="POST" action="" enctype="multipart/form-data">
-            {% csrf_token %}
+<div class="container px-4 py-3 px-md-5 text-center text-lg-start my-2">
+    <div class="row d-flex justify-content-center align-items-center">
+
+        <div class="col-lg-8 position-relative">
+            <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+            <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+
+            <div class="card bg-glass">
+                <h1 class="text-center">Unggah karyamu disini</h1>
+                <div class="card-body px-4 py-5 px-md-5 text-center">
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        {{ form.as_p }}
             
-            {{ form.as_p }}
+                        <input type="submit" value="Post Karya" class="btn btn-outline-primary">
+                    </form>
+                </div>
+            </div>
+        </div>
 
-            <input type="submit" value="Post Karya" class="btn btn-outline-primary">
-        </form>
     </div>
 </div>
 {% endblock content %}
