@@ -19,14 +19,9 @@ def riwayat(request):
     context = {'data_donasi' : data_donasi}
     return render(request, "riwayat.html", context)
 
-# def getData(request):
-#     searchds = Program.objects.all()
-#     searchds_list = serializers.serialize('json', searchds)
-#     return HttpResponse(searchds_list, content_type="text/json-comment-filtered")
-
 # Create your views here.
 
-def list_donatur(request, program):
+def jml_donasi(request, program):
     donasi_terkumpul = Program.objects.get(pk=program)
     response = {
         'donasi_terkumpul': donasi_terkumpul,
@@ -37,13 +32,13 @@ def pesan(request):
     username = 'anon'
     if request.user.is_authenticated:
         username = request.user
-        # print(username)
+        print(username)
 
     if request.POST:
         nama = username
         isi = request.POST.get('isi')
         Pesan.objects.create(nama=nama, isi=isi)
-        return HttpResponseRedirect('/riwayat/')
+        return HttpResponseRedirect('/riwayat')
         
     else:
         form = FormPesan()

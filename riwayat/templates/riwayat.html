@@ -1,35 +1,30 @@
 {% extends 'base.html' %}
 {% load static %}
 
-<!-- {% comment %} 
-{% block content %}
-<h1>{{nama}}</h1>
-
-<table>
-    <tr>
-    <th>Nama Donasi</th>
-    <th>Deskripsi</th>
-    </tr>
-    Tambahkan data di bawah baris ini 
-    {% for karya in nama_donasi %}
-    <tr>
-        <th>{{karya.nama_donasi}}</th>
-        <th>{{karya.deskripsi}}</th>
-    </tr>
-    {% endfor %}
-</table>
-{% endblock content %} 
-{% endcomment %} -->
-
 {% block headone %}
 <title>Riwayat</title>
-<!-- <link rel='stylesheet' href="{% static '/css/riwayat.css' %}" type='text/css'> -->
-<link rel="stylesheet" href="{% static '/css/static.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static '/css/riwayat.css' %}">
 <script src="{% static '/js/pesan.js' %}"></script>
 {% endblock %}
 
 
 {% block content %}
+<!-- Navbar -->
+<nav>
+    <a href="{% url 'arti:index' %}">ARTi</a>
+    <a href="{% url 'arti:post_karya' %}">Post Karya</a>
+    <a href="{% url 'arti:galeri' %}">Galeri</a>
+    <a href="leaderboard/">Leaderboard</a>
+    <a href="profileuser/">Profile User</a>
+    <a href="#">Riwayat</a>
+    <div class="topnav-right">
+        {% if user.is_superuser %}
+        <a class="btn btn-success" href="admin/">Admin</a>
+        {% endif %}
+        <a class="btn btn-danger" href="{% url 'arti:logout' %}">Logout</a>
+    </div>
+    <div class="animation start-home"></div>
+</nav>
 
 <!-- Bagian Riwayat -->
 <div class="container-fluid">
@@ -37,34 +32,13 @@
         <div class="col-sm-12">
 
             <div></div>
-            <h1 class="judulListDonatur center">Donasi Terkumpul</h1>
+            <h1 class="judulDanaTerkumpul center">Donasi Terkumpul</h1>
             <br>
                 <div class="container">
                     {% if donasi_terkumpul.donatur.all.count == 0 %}
                     <h3 class="belum-ada center">Belum ada donasi terkumpul</h3>
                     {% else %}
-                    <table class="table table-striped table-bordered" style="text-align: center;">
-                        <thead>
-                            <tr>
-                                <th scope="col" >Nama Donatur </th>
-                                <th scope="col">Donasi Terkumpul</th>
-                            </tr>
-                        </thead>
-
-                        {% for data in donasi_terkumpul.donatur.all %}
-                        {% if data == donasi_terkumpul.donatur.last %}
-                        <tr>
-                            <td scope="row">{{ data.nama }}</td>
-                            <td scope="row">{{ data.jmldonasi }}</td>
-                        </tr>
-                        {% else %}
-                        <tr>
-                            <td scope="row">{{ data.nama }}</td>
-                            <td scope="row">{{ data.jmldonasi }}</td>
-                        </tr>
-                        {% endif %}
-                        {% endfor %}
-                    </table>
+                    <h3 class="danaTerkumpul center">Rp. {{ donasi_terkumpul }}</h3>
                     {% endif %}
                 </div>
             <br>
@@ -100,7 +74,7 @@
     <div class="bagian-text">
         {%if user.is_authenticated%}
         <p class="judul-pesan">Berikan Pesan</p>
-        <!-- <form action="/pesan/" method="POST"> -->
+        <!-- <form action="/riwayat/" method="POST"> -->
         
             {% csrf_token %}
             <p>

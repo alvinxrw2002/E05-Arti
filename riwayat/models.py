@@ -10,11 +10,9 @@ class Pesan(models.Model):
         return self.nama
 
 class Program(models.Model):
-    name   = models.CharField(max_length=200)
-    # photo  = models.ImageField(upload_to="static/img")
-    # desc   = models.TextField()
-    # target = models.IntegerField()
-    # remDay = models.IntegerField()
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    total_donasi = models.IntegerField(null=True)
+    # name   = models.CharField(max_length=200)
     # donatur = models.ManyToManyField(Donasi, blank=True)
 
 # class Update(models.Model):

@@ -7,5 +7,5 @@ app_name = 'riwayat'
 
 urlpatterns = [
     path('', riwayat, name='riwayat'),
-    path('pesanajax', pesanajax, name='pesanajax'),
+    path('pesanajax/', pesanajax, name='pesanajax'),
 ]

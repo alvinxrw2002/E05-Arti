@@ -1,3 +1,21 @@
+function reveal() {
+    var reveals = document.querySelectorAll(".reveal");
+
+    for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        var elementVisible = 150;
+
+        if (elementTop < windowHeight - elementVisible) {
+            reveals[i].classList.add("active");
+        } else {
+            reveals[i].classList.remove("active");
+        }
+    }
+}
+
+window.addEventListener("scroll", reveal);
+
 $(document).ready(function(){
     
 
@@ -20,7 +38,7 @@ $(document).ready(function(){
 
 
     $("#tombol-kirim").click(function(){
-        //ajax untuk simpan pesan dan nampilin testi yg baru dimasukkin tsb.
+        //ajax untuk simpan pesan dan nampilin pesan yg baru dimasukkin tsb.
 
         var isi = $("#id_isi").val();
         // alert(isi);
