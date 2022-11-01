@@ -62,7 +62,7 @@
                 {% if user.is_superuser %}
                 <p class="text-center text-white" style="background-color: purple; border-radius: 4px;">{{ karya.kategori }}</p>
                 {% endif %}
-                <img src="{{ karya.gambar }}" class="card-img-top">
+                <img src="{{ karya.gambar.url }}" class="card-img-top">
                 <div class="card-body">
                     <p id="{{ karya.id }}-judul" class="card-text">{{ karya.judul }}</p>
                     <h5 id="{{ karya.id }}-harga" class="card-title">Rp{{ karya.harga }}</h5>
