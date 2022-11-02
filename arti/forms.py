@@ -7,7 +7,7 @@ class FormKarya(ModelForm):
         model = Karya
         fields = ('gambar', 'judul', 'kategori', 'harga', 'deskripsi')
         labels = {
-            'gambar': '',
+            'gambar': 'Pilih karya yang ingin diunggah',
             'judul': 'Judul Karya',
             'kategori': 'Pilih Kategori',
             'harga': 'Harga (Rp)',
@@ -26,8 +26,9 @@ class FormKarya(ModelForm):
             ('sketch', 'sketch'),
         ]
         widgets = {
+            'gambar': FileInput(attrs={'class': 'form-control', 'type': 'file'}),
             'judul': TextInput(attrs={'class': 'form-control'}),
-            'kategori': Select(choices=CATEGORY_CHOICES, attrs={'class': 'form-control'}),
+            'kategori': Select(choices=CATEGORY_CHOICES, attrs={'class': 'form-select'}),
             'harga': NumberInput(attrs={'class': 'form-control'}),
             'deskripsi': Textarea(attrs={'class': 'form-control', 'cols': 40, 'rows': 10}),
         }

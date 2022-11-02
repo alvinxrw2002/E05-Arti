@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'leaderboard',
     'profileuser',
     'galeri',
-
+    'beli_karya',
 ]
 
 MIDDLEWARE = [

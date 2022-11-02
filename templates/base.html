@@ -8,13 +8,35 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
   </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/nav.css' %}">
   {% block meta %}
   {% endblock meta %}
 </head>
 
 <body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <nav class="topnav" id="myTopnav">
+    <a href="#" class="active">ARTi</a>
+    <a href="{% url 'arti:galeri' %}">Galeri</a>
+    <a href="{% url 'leaderboard:show_leaderboard' %}">Leaderboard</a>
+    {% if user.is_authenticated %}
+    <a href="{% url 'arti:post_karya' %}">Post Karya</a>
+    <a href="{% url 'profileuser:show_profile' %}">Profile User</a>
+    <a href="{% url 'beli_karya:beli_karya' %}"> Beli Karya </a>
+    {% if user.is_superuser %}
+    <a href="/admin">Admin</a>
+    {% endif %}
+    <a class="btn btn-danger" href="{% url 'arti:logout' %}" style="float: right;">Logout</a>
+    {% else %}
+    <a class="btn btn-info" href="{% url 'arti:login' %}"style="float: right;">Login</a>
+    <a class="btn btn-warning" href="{% url 'arti:register' %}"style="float: right; margin-right: 20px">Register</a>
+    {% endif %}
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+    </a>
+</nav>
   {% block content %}
   {% endblock content %}
 </body>
