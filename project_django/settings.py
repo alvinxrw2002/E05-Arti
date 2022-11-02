@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'arti',
     'leaderboard',
     'profileuser',
+    'beli_karya',
 
 ]
 
