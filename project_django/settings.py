@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'arti',
     'leaderboard',
     'profileuser',
+    'galeri',
     'beli_karya',
-
 ]
 
 MIDDLEWARE = [

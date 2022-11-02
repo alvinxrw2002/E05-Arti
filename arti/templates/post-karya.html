@@ -12,7 +12,8 @@
 
 <nav class="topnav" id="myTopnav">
     <a href="{% url 'arti:index' %}">ARTi</a>
-    <a href="{% url 'arti:galeri' %}">Galeri</a>
+    <a href="#">Post Karya</a>
+    <a href="{% url 'galeri:show_galeri' %}">Galeri</a>
     {% if user.is_authenticated %}
     <a href="#" class="active">Post Karya</a>
     <a href="leaderboard/">Leaderboard</a>
