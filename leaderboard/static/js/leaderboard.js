@@ -42,6 +42,10 @@ function deactivateElem(){
     $("#form_button_success").prop("disabled", true)
 }
 
+function active(){
+    $('#link_leaderboard').attr("class", "active");
+}
+
 $(document).ready(function(){
     $("#button_pengguna").click(function(){
         $.ajax({
