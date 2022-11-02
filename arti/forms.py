@@ -27,7 +27,7 @@ class FormKarya(ModelForm):
         ]
         widgets = {
             'judul': TextInput(attrs={'class': 'form-control'}),
-            'kategori': Select(choices=CATEGORY_CHOICES, attrs={'class': 'form-control'}),
+            'kategori': Select(choices=CATEGORY_CHOICES, attrs={'class': 'form-select'}),
             'harga': NumberInput(attrs={'class': 'form-control'}),
             'deskripsi': Textarea(attrs={'class': 'form-control', 'cols': 40, 'rows': 10}),
         }
