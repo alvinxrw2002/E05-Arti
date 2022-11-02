@@ -36,6 +36,8 @@ def beli_karya(request):
         print(karyas)
         for karya in karyas:
             k = Karya.objects.get(pk=int(karya))
+            k.sudah_dibeli = True
             transaksi = Transaksi(user=loggedin_user, karya = k)
+            k.save()
             transaksi.save()
     return render(request, 'beli-karya.html', context)
