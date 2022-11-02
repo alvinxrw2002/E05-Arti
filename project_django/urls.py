@@ -23,6 +23,7 @@ urlpatterns = [
     path('leaderboard/', include('leaderboard.urls')),
     path('profileuser/', include('profileuser.urls')),
     path('beli_karya/', include('beli_karya.urls')),
+    path('riwayat/', include('riwayat.urls')),
 
 ]
 if settings.DEBUG:  

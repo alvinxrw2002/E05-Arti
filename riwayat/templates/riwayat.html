@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block meta %}
+<title>Riwayat</title>
+<link rel="stylesheet" type="text/css" href="{% static '/css/riwayat.css' %}">
+{% endblock meta %}
+
+{% block content %}
+<script type="text/javascript" src="{% static 'js/galeri.js' %}"></script>
+<body>
+<!-- Navbar -->
+<nav class="topnav" id="myTopnav">
+    <a href="{% url 'arti:index' %}">ARTi</a>
+    <a href="{% url 'arti:galeri' %}">Galeri</a>
+    {% if user.is_authenticated %}
+    <a href="{% url 'arti:post_karya' %}">Post Karya</a>
+    <a href="{% url 'leaderboard:show_leaderboard' %}">Leaderboard</a>
+    <a href="{% url 'profileuser:show_profile' %}">Profile User</a>
+    <a href="#riwayat" class="active">Riwayat</a>
+    {% if user.is_superuser %}
+    <a href="{% url 'admin:index' %}">Admin</a>
+    {% endif %}
+    <a class="btn btn-danger" href="{% url 'arti:logout' %}" style="float: right;">Logout</a>
+    {% else %}
+    <a class="btn btn-info" href="{% url 'arti:login' %}"style="float: right;">Login</a>
+    <a class="btn btn-warning" href="{% url 'arti:register' %}"style="float: right; margin-right: 20px">Register</a>
+    {% endif %}
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+    </a>
+</nav>
+
+<!-- Bagian Donasi Terkumpul -->
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-12">
+            <h1 class="judulDanaTerkumpul center" style="text-align: center;">Donasi Terkumpul</h1>
+                <div class="container">
+                    {% if jumlahDonasi == 0 %}
+                    <h3 class="belum-ada center">Belum ada donasi terkumpul</h3>
+                    {% else %}
+                    <h3 class="danaTerkumpul center">Rp. {{ jumlahDonasi }}</h3>
+                    {% endif %}
+                </div>
+            <br>
+        </div>
+
+    </div>
+</div>
+<div style="height: 50px;" id="riwayat"></div>
+
+
+<!-- Bagian Pesan -->
+<script>
+    $(document).ready(function(){
+
+        $.ajax({url: "pesanajax?q=", success: function(result){
+            console.log(result);
+
+            $("#divpesan").empty();
+            $("#id_isi").val("");
+            $("#lettercount").empty();
+
+            $("#divpesan").append("<p class=\"judul-pesan\">Pesan</p>")
+            $("#divpesan").append('<div class="row" id="kumpulan-pesan"></div>')
+            var i;
+            for (i = 0; i < result.length; i++){
+                var isiPesan = result[i].fields.isi;
+                var nama = result[i].fields.nama;
+                // alert(isiPesan + nama);
+                $("#kumpulan-pesan").append('<div class="col-lg-4 mb-4 col-12"> <div class="card" style="min-height: 200px;"><div class="card-body"><div class="pesan-textfield"><p style="padding-top: 10px;">' +isiPesan+ '</p></div><div class="pesan-nama"><p style="right: 0; position: absolute;">-' +nama+ '</p></div></div></div></div>')
+            }
+        }});
+
+        $("#id_isi").keyup(function(){
+            //character count isi txt area pesan
+    
+            var txtlength = $("#id_isi").val().length;
+            $("#lettercount").empty();
+    
+            if (txtlength > 0) {
+                $("#lettercount").append(txtlength+"/100");
+            } 
+            
+            if (txtlength > 85) {
+                $("#lettercount").empty();
+                $("#lettercount").append('<span style="color:red;">' + txtlength + '/100</span>');
+            }
+            
+        });
+    
+        $("#tombol-kirim").click(function(){
+            //ajax untuk simpan pesan dan nampilin pesan yg baru dimasukkin tsb.
+    
+            var isi = $("#id_isi").val();
+            // alert(isi);
+            if (isi.length > 0 && isi != "") {
+                $.ajax({url: "pesanajax?q=" + isi, success: function(result){
+                    console.log(result);
+        
+                    $("#divpesan").empty();
+                    $("#id_isi").val("");
+                    $("#lettercount").empty();
+        
+                    $("#divpesan").append("<p class=\"judul-pesan\">Pesan</p>")
+                    $("#divpesan").append('<div class="row" id="kumpulan-pesan"></div>')
+                    var i;
+                    for (i = 0; i < result.length; i++){
+                        var isiPesan = result[i].fields.isi;
+                        var nama = result[i].fields.nama;
+                        // alert(isiPesan + nama);
+                        $("#kumpulan-pesan").append('<div class="col-lg-4 mb-4 col-12"> <div class="card" style="min-height: 200px;"><div class="card-body"><div class="pesan-textfield"><p style="padding-top: 10px;">' +isiPesan+ '</p></div><div class="pesan-nama"><p style="right: 0; position: absolute;">-' +nama+ '</p></div></div></div></div>')
+                    }
+                }});
+            } else {
+                alert("Anda belum mengisi pesan!");
+            }
+            
+        });
+    });
+    </script>
+
+<div class="container-tulisan">
+    <div class="bagian-text" id="divpesan">
+        <p class="judul-pesan">Pesan</p>
+    </div>
+    <div class="bagian-text">
+        {%if user.is_authenticated%}
+        <p class="judul-pesan">Berikan Pesan</p>
+        <!-- <form action="/riwayat/" method="POST"> -->
+        
+            {% csrf_token %}
+            <p>
+                <textarea name="isi" cols="40" rows="10" class="form-control" maxlength="100"
+                    placeholder="Masukkan pesan anda" required="" id="id_isi"></textarea>
+            </p>
+            <p id="lettercount"></p>
+            <div class="kananin">
+                <button class="btn btn-primary rounded-pill btn-donasi" id="tombol-kirim">Kirim</button>
+            </div>
+
+        <!-- </form> -->
+        {% else %}
+        <p class="judul-pesan" style="font-size: 30px; color: black;"><a href="/login/">login</a> untuk memberikan
+            pesan</p>
+        {% endif %}
+    </div>
+</div>
+</body>
+{% endblock %}

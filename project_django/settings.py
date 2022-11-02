@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'leaderboard',
     'profileuser',
     'beli_karya',
+    'riwayat',
 
 ]
 

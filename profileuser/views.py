@@ -9,7 +9,8 @@ from django.template import loader
 from django.urls import reverse
 from profileuser.forms import UserImageForm
 from django.contrib.auth.decorators import login_required
-from arti.models import *  
+from arti.models import * 
+from beli_karya.models import *
 
 # Create your views here.
 
@@ -18,6 +19,7 @@ def show_profile(request):
     profile = Profile.objects.filter(user=request.user).last()
     profileimg = UploadImage.objects.filter(user=request.user).last()
     profileimg2 = Karya.objects.filter(user=request.user)
+    imgbeli = Transaksi.objects.filter(user=request.user)
 
     template = loader.get_template('profile.html')
 
@@ -25,6 +27,7 @@ def show_profile(request):
         'changes' : profile,
         'img' : profileimg,
         'img2' : profileimg2,
+        'imgbeli' : imgbeli,
 
     }
     return HttpResponse(template.render(context, request))
@@ -33,12 +36,15 @@ def add(request):
     profile = Profile.objects.filter(user=request.user).last()
     profileimg = UploadImage.objects.filter(user=request.user).last()
     profileimg2 = Karya.objects.filter(user=request.user)
+    imgbeli = Transaksi.objects.filter(user=request.user)
+
     template = loader.get_template('add.html')
 
     context = {
         'changes' : profileValue,
         'img' : profileimg,
         'img2' : profileimg2,
+        'imgbeli' : imgbeli,
 
     }
     return HttpResponse(template.render(context, request)) 
@@ -86,12 +92,15 @@ def show_ajax_profile(request):
     profile = Profile.objects.filter(user=request.user).last()
     profileimg = UploadImage.objects.filter(user=request.user).last()     
     profileimg2 = Karya.objects.filter(user=request.user)
+    imgbeli = Transaksi.objects.filter(user=request.user)
+
     template = loader.get_template('edit_ajax_profile.html')
 
     context = {
         'changes' : profile,
         'img' : profileimg,
         'img2' : profileimg2,
+        'imgbeli' : imgbeli,
     }
     return HttpResponse(template.render(context, request))
 
