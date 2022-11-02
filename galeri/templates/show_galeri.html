@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Galeri!</title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/galeri.css' %}">
+<script type="text/javascript" src="{% static 'js/galeri.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/ready.js' %}"></script>
+{% endblock meta %}
+
+{% block content %}
+<style>
+    #cor{
+    width: 50%;
+    margin: auto;
+    }
+    h1{
+        text-align: center;
+    }
+</style>
+<nav>
+    <a href="{% url 'arti:index' %}">ARTi</a>
+    <a href="{% url 'arti:post_karya' %}">Post Karya</a>
+    <a href="#">Galeri</a>
+    <a href="{% url 'leaderboard:show_leaderboard' %}">Leaderboard</a>
+    <a href="{% url 'profileuser:show_profile' %}">Profile User</a>
+    <div class="topnav-right">
+        {% if user.is_superuser %}
+        <a class="btn btn-success" href="admin/">Admin</a>
+        {% endif %}
+        <a class="btn btn-danger" href="{% url 'arti:logout' %}">Logout</a>
+    </div>
+    <div class="animation start-home"></div>
+</nav>
+
+<h1 class="my-5 mx-5 h-100">Galeri Karya!</h1>
+<div id="carouselExampleControls" class="carousel slide centered-section my-5" data-bs-ride="carousel">
+    <div class="carousel-inner center" id="karya">
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+{% endblock content %}

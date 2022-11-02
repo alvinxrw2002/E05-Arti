@@ -1,9 +1,9 @@
 function hapusKarya(idData) {
     $.ajax({
-        url: `/delete-karya/${idData}`,
+        url: `/galeri/delete-karya/${idData}`,
         success: function () {
-            $(`#${idData}`).remove();
+            $(`#karya-${idData}`).remove();
+            show_galeri()
         }
     });
 }
-

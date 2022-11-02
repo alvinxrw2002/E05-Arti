@@ -22,6 +22,9 @@ urlpatterns = [
     path('', include('arti.urls')),
     path('leaderboard/', include('leaderboard.urls')),
     path('profileuser/', include('profileuser.urls')),
+    path('galeri/', include('galeri.urls')),
+
+
 
 ]
 if settings.DEBUG:  

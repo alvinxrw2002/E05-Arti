@@ -86,7 +86,7 @@ def post_karya(request):
             karya = form.save(commit=False)
             karya.user = request.user
             karya.save()
-            return redirect('arti:galeri')
+            return redirect('galeri:show_galeri')
 
     # jika method-nya GET atau yang lainnya, buat form kosong
     else:
