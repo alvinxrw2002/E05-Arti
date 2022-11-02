@@ -6,3 +6,8 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     username = models.CharField(max_length = 100, default="guest")
     text = models.TextField()
+
+class UserExtended(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    username = models.CharField(max_length=100, default="guest")
+    pembelian = models.IntegerField()
