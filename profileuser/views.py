@@ -20,6 +20,10 @@ def show_profile(request):
     profileimg = UploadImage.objects.filter(user=request.user).last()
     profileimg2 = Karya.objects.filter(user=request.user)
     imgbeli = Transaksi.objects.filter(user=request.user)
+    donasi = 0
+    for jumlahDonasi in imgbeli:
+        if jumlahDonasi.karya.sudah_dibeli == True:
+            donasi += jumlahDonasi.karya.harga
 
     template = loader.get_template('profile.html')
 
@@ -28,6 +32,7 @@ def show_profile(request):
         'img' : profileimg,
         'img2' : profileimg2,
         'imgbeli' : imgbeli,
+        'donasi' : donasi,
 
     }
     return HttpResponse(template.render(context, request))
