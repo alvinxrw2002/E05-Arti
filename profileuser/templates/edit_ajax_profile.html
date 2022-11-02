@@ -99,7 +99,19 @@
         </div>
       </div>
     </div>
-    
+    {% endfor %}
+
+    <!--  untuk loop gambar  -->
+    {% for imageses in imgbeli %}
+    <div class="col-sm-6 mb-3">
+      <div id="kartupostan" class="card h-100">
+        <div id="kartupostan" class="card-body">
+          <img src="{{ imageses.karya.gambar.url }}" loading="lazy" alt="" class="progress mb-3" style="height:100%; width: 100%">
+          <div class="progress mb-3" style="height: 5px">
+          </div>
+        </div>
+      </div>
+    </div>
     <!--akhir dari loop -->
     {% endfor %}
   </div>

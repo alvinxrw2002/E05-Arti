@@ -24,6 +24,7 @@ urlpatterns = [
     path('profileuser/', include('profileuser.urls')),
     path('galeri/', include('galeri.urls')),
     path('beli_karya/', include('beli_karya.urls')),
+    path('riwayat/', include('riwayat.urls')),
 ]
 if settings.DEBUG:  
         urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT) 

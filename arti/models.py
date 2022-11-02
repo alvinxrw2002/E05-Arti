@@ -11,6 +11,7 @@ class Karya(models.Model):
     harga = models.BigIntegerField()
     deskripsi = models.CharField(max_length=10000)
     tanggal = models.DateField(auto_now_add=True)
+    sudah_dibeli = models.BooleanField(default=False)
 
 class UserArti(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
