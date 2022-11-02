@@ -10,10 +10,12 @@
 {% block content %}
 <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
 
+
+
 <nav class="topnav" id="myTopnav">
     <a href="#" class="active">ARTi</a>
-    <a href="{% url 'arti:galeri' %}">Galeri</a>
     <a href="leaderboard/">Leaderboard</a>
+    <a href="{% url 'galeri:show_galeri' %}">Galeri</a>
     {% if user.is_authenticated %}
     <a href="{% url 'arti:post_karya' %}">Post Karya</a>
     <a href="profileuser/">Profile User</a>
