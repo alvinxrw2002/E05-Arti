@@ -37,7 +37,9 @@ def beli_karya(request):
         print(karyas)
         for karya in karyas:
             k = Karya.objects.get(pk=int(karya))
+            k.sudah_dibeli = True
             transaksi = Transaksi(user=loggedin_user, karya = k)
+            k.save()
             transaksi.save()
             user_ext = UserExtended.objects.filter(user = loggedin_user).first()
             if(user_ext != None):
