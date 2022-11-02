@@ -19,7 +19,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <nav class="topnav" id="myTopnav">
     <a href="#" class="active">ARTi</a>
-    <a href="{% url 'arti:galeri' %}">Galeri</a>
+    <a href="{% url 'galeri:show_galeri' %}">Galeri</a>
     <a href="{% url 'leaderboard:show_leaderboard' %}">Leaderboard</a>
     {% if user.is_authenticated %}
     <a href="{% url 'arti:post_karya' %}">Post Karya</a>
