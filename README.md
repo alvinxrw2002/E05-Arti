@@ -12,7 +12,7 @@ Anggota:
 ARTi
 
 ## Link Aplikasi Heroku:
-https://e05-arti.herokuapp.com
+https://arti-pbp-e05.herokuapp.com/
 
 ## Tools:
 * HTML
