@@ -18,13 +18,13 @@
 <body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <nav class="topnav" id="myTopnav">
-    <a href="#" class="active">ARTi</a>
-    <a href="{% url 'arti:galeri' %}">Galeri</a>
-    <a href="{% url 'leaderboard:show_leaderboard' %}">Leaderboard</a>
+    <a id="link_arti" href="#">ARTi</a>
+    <a id="link_galeri" href="{% url 'arti:galeri' %}">Galeri</a>
+    <a id="link_leaderboard" href="{% url 'leaderboard:show_leaderboard' %}">Leaderboard</a>
     {% if user.is_authenticated %}
-    <a href="{% url 'arti:post_karya' %}">Post Karya</a>
-    <a href="{% url 'profileuser:show_profile' %}">Profile User</a>
-    <a href="{% url 'beli_karya:beli_karya' %}"> Beli Karya </a>
+    <a id="link_post_karya" href="{% url 'arti:post_karya' %}">Post Karya</a>
+    <a id="link_profileuser" href="{% url 'profileuser:show_profile' %}">Profile User</a>
+    <a id="link_beli_karya" href="{% url 'beli_karya:beli_karya' %}"> Beli Karya </a>
     {% if user.is_superuser %}
     <a href="/admin">Admin</a>
     {% endif %}
