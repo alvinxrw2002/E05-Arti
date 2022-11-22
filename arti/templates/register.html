@@ -26,31 +26,29 @@
                             {% csrf_token %}
                             <!-- Username input -->
                             <div class="form-outline mb-4">
-                                <input type="text" name="username" maxlength="150" autocapitalize="none"
-                                    autocomplete="username" autofocus="" required="" id="id_username" size="50">
-                                <br>
                                 <label class="form-label" for="form3Example3">Username</label>
+                                <input type="text" name="username" maxlength="150" autocapitalize="none"
+                                    autocomplete="username" autofocus="" required="" id="id_username" class="form-control">
                             </div>
 
                             <!-- Password input -->
                             <div class="form-outline mb-4">
-                                <input type="password" name="password1" autocomplete="new-password" required=""
-                                    id="id_password1" size="50">
-                                <br>
                                 <label class="form-label" for="form3Example4">Password</label>
+                                <input type="password" name="password1" autocomplete="new-password" required=""
+                                    id="id_password1" class="form-control">
                             </div>
 
                             <!-- Password confirmation input -->
                             <div class="form-outline mb-4">
-                                <input type="password" name="password2" autocomplete="new-password" required=""
-                                    id="id_password2" size="50">
-                                <br>
                                 <label class="form-label" for="form3Example4">Confirm password</label>
+                                <input type="password" name="password2" autocomplete="new-password" required=""
+                                    id="id_password2" class="form-control">
                             </div>
 
                             <!-- Category preference input -->
                             <div class="form-outline mb-4">
-                                <select name="kategori" width="50px">
+                                <label class="form-label" for="form3Example4">Select your category preference</label><br>
+                                <select class="form-select" name="kategori">
                                     <option value="abstract">abstract</option>
                                     <option value="cartoon">cartoon</option>
                                     <option value="collage">collage</option>
@@ -62,8 +60,6 @@
                                     <option value="silhoutte">silhoutte</option>
                                     <option value="sketch">sketch</option>
                                 </select>
-                                <br>
-                                <label class="form-label" for="form3Example4">Select your category preference</label>
                             </div>
 
                             {% if form.errors %}
@@ -83,11 +79,11 @@
                             </div>
 
                             <div>Already have an acccount? <a href="{% url 'arti:login' %}">Sign in</a></div>
+                            <div>or <a href="{% url 'arti:index' %}">Login as Guest</a></div>
                         </form>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </section>

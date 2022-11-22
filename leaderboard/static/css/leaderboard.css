@@ -1,0 +1,40 @@
+.isi{
+    margin-top: 1.5%;
+}
+
+#header{
+    background-image: url('/static/img/14649402_SL_043021_42650_02.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height: 450px;
+    align-items: center;
+}
+
+#comments{
+    background-image: url('/static/img/14649402_SL_043021_42650_02.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+@media (max-width: 500px){
+    #header{
+        min-height: 225px;
+    }
+}
+h1 {
+    border-color: white;
+    stroke-width: 1pt;
+}
+
+
+@media (max-width: 1000px){
+    #commentsCarousel{
+        height:200px!important;
+    }
+    .card{
+        height: 200px!important;
+    }
+}
+

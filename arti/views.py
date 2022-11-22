@@ -11,14 +11,15 @@ from .models import Karya, UserArti
 from .forms import FormKarya
 
 # Create your views here.
-@login_required(login_url='/login')
 def index(request):
-    return render(request, 'index.html')
+    user = "guest"
+    if request.user.is_authenticated:
+        user = request.user
+    return render(request, 'index.html', {'user': user})
 
-@login_required(login_url='/login')
 def galeri(request):
     loggedin_user = request.user
-    if loggedin_user.is_superuser:
+    if loggedin_user.is_superuser or not loggedin_user.is_authenticated:
         context = {
         'user': loggedin_user,
         'karyas': Karya.objects.all()
@@ -74,7 +75,7 @@ def register(request):
 def logout_user(request):
     # Redirect ke halaman login dan hapus cookie
     logout(request)
-    response = HttpResponseRedirect(reverse('arti:login'))
+    response = HttpResponseRedirect(reverse('arti:index'))
     response.delete_cookie('last_login')
     return response
 
@@ -86,7 +87,7 @@ def post_karya(request):
             karya = form.save(commit=False)
             karya.user = request.user
             karya.save()
-            return redirect('arti:galeri')
+            return redirect('galeri:show_galeri')
 
     # jika method-nya GET atau yang lainnya, buat form kosong
     else:
