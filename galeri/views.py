@@ -21,7 +21,7 @@ def get_object_karya_json(request) :
     for item in karya :
         data.append(
             {"pk": item.pk, 
-            "fields": {"user_loggedin": loggedin_user.id, "user": item.user.id, "gambar" : encode_datetime(item.gambar), "judul" : item.judul,
+            "fields": {"user_loggedin": loggedin_user.id, "user": item.user.id, "gambar" : (item.gambar.url), "judul" : item.judul,
             "kategori" : item.kategori, "harga": item.harga, "deskripsi": item.deskripsi,
             "tanggal": item.tanggal}})
     data = {'data' : data}

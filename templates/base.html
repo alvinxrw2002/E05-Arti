@@ -36,6 +36,7 @@
     <a id="link_post_karya" href="{% url 'arti:post_karya' %}">Post Karya</a>
     <a id="link_profileuser" href="{% url 'profileuser:show_profile' %}">Profile User</a>
     <a id="link_beli_karya" href="{% url 'beli_karya:beli_karya' %}"> Beli Karya </a>
+    <a id="link_riwayat" href="{% url 'riwayat:jml_donasi' %}">Riwayat</a>
     {% if user.is_superuser %}
     <a href="/admin">Admin</a>
     {% endif %}
@@ -53,5 +54,3 @@
 </body>
 
 </html>
-
-

@@ -9,6 +9,7 @@ from django.http import HttpResponse
 from arti.models import Karya
 from django.http import HttpResponse
 from django.core import serializers
+from leaderboard.models import UserExtended
 
 # Create your views here.
 # @login_required(login_url='/login/')
@@ -37,7 +38,7 @@ def change_comments(request):
     return HttpResponse(serializers.serialize("json", comments), content_type="application/json")
 
 def leaderboard_pengguna(request):
-    users = User.objects.all().order_by("pk")
+    users = UserExtended.objects.all().order_by("-pembelian")
     # context={
     #     "users": users,
     # }
