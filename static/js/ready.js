@@ -17,7 +17,7 @@ async function show_galeri(){
                 html += `
                 <div class="carousel-item active" id=karya-${element.pk}>
                     <div class="card text-bg-info mb-3" style="width: 40rem" id='cor'>
-                        <img src='/media/${element.fields.gambar}' class='d-block w-100'></img>
+                        <img src='${element.fields.gambar}' class='d-block w-100'></img>
                         <div class="card-body">
                             <h4 id="${element.fields.id}-judul" class="card-text">${element.fields.judul}</h4>
                             <h5 id="${element.fields.id}-harga" class="card-title">Rp${element.fields.harga}</h5>
@@ -33,7 +33,7 @@ async function show_galeri(){
             html += `
             <div class="carousel-item active" id=karya-${element.pk}>
                 <div class="card text-bg-info mb-3" style="width: 40rem" id='cor'>
-                    <img src='/media/${element.fields.gambar}' class='d-block w-100'></img>
+                    <img src='/media/${element.fields.gambar.url}' class='d-block w-100'></img>
                     <div class="card-body">
                         <h4 id="${element.fields.id}-judul" class="card-text">${element.fields.judul}</h4>
                         <h5 id="${element.fields.id}-harga" class="card-title">Rp${element.fields.harga}</h5>
@@ -48,7 +48,7 @@ async function show_galeri(){
                 html += `
                 <div class="carousel-item" id=karya-${element.pk}>
                     <div class="card text-bg-info mb-3" style="width: 40rem" id='cor'>
-                        <img src='/media/${element.fields.gambar}' class='d-block w-100'></img>
+                        <img src='${element.fields.gambar}' class='d-block w-100'></img>
                         <div class="card-body">
                             <h4 id="${element.fields.id}-judul" class="card-text">${element.fields.judul}</h4>
                             <h5 id="${element.fields.id}-harga" class="card-title">Rp${element.fields.harga}</h5>
@@ -64,7 +64,7 @@ async function show_galeri(){
             html += `
             <div class="carousel-item" id=karya-${element.pk}>
                 <div class="card text-bg-info mb-3" style="width: 40rem" id='cor'>
-                    <img src='/media/${element.fields.gambar}' class='d-block w-100'></img>
+                    <img src='${element.fields.gambar}' class='d-block w-100'></img>
                     <div class="card-body">
                         <h4 id="${element.fields.id}-judul" class="card-text">${element.fields.judul}</h4>
                         <h5 id="${element.fields.id}-harga" class="card-title">Rp${element.fields.harga}</h5>
