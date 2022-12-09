@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from .models import Karya, UserArti
 from .forms import FormKarya
+from django.http import JsonResponse
 
 # Create your views here.
 def index(request):
@@ -114,3 +115,30 @@ def edit_karya(request, karya_id):
     karya_edit.deskripsi = request.POST["deskripsi"]
     karya_edit.save()
     return HttpResponse("success")
+
+
+@csrf_exempt
+def ajax_login(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username=username, password=password)
+    if user is not None:
+        if user.is_active:
+            login(request, user)
+            # Redirect to a success page.
+            return JsonResponse({
+            "status": True,
+            "message": "Successfully Logged In!"
+            # Insert any extra data if you want to pass data to Flutter
+            }, status=200)
+        else:
+            return JsonResponse({
+            "status": False,
+            "message": "Failed to Login, Account Disabled."
+            }, status=401)
+
+    else:
+        return JsonResponse({
+        "status": False,
+        "message": "Failed to Login, check your email/password."
+        }, status=401)
