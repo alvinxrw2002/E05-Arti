@@ -26,6 +26,7 @@ def show_leaderboard(request):
     }
     return render(request, 'leaderboard.html', context)
 
+@csrf_exempt
 def create_comment(request):
     form = CommentForm(request.POST)
     if form.is_valid():
