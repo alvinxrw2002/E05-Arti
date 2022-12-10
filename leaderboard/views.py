@@ -11,6 +11,7 @@ from django.http import HttpResponse
 from django.core import serializers
 from leaderboard.models import UserExtended
 from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 
 # Create your views here.
 # @login_required(login_url='/login/')
