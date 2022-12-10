@@ -26,7 +26,6 @@ def show_leaderboard(request):
     }
     return render(request, 'leaderboard.html', context)
 
-@csrf_exempt
 def create_comment(request):
     form = CommentForm(request.POST)
     if form.is_valid():
@@ -34,7 +33,7 @@ def create_comment(request):
        comment.user = request.user
        comment.username = request.user.username
        comment.save()
-    return JsonResponse({"pesan": "halo"}, status=200)
+    return JsonResponse({"message": "success"}, status=200)
 
 def change_comments(request):
     comments = Comment.objects.all()
