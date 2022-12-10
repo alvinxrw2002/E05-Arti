@@ -10,6 +10,7 @@ from arti.models import Karya
 from django.http import HttpResponse
 from django.core import serializers
 from leaderboard.models import UserExtended
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 # @login_required(login_url='/login/')
@@ -23,7 +24,8 @@ def show_leaderboard(request):
         'form' : new_form,
     }
     return render(request, 'leaderboard.html', context)
-    
+
+@csrf_exempt
 def create_comment(request):
     form = CommentForm(request.POST)
     if form.is_valid():
