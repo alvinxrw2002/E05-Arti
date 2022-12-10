@@ -33,7 +33,7 @@ def create_comment(request):
        comment.user = request.user
        comment.username = request.user.username
        comment.save()
-    return HttpResponse('Berhasil menambahkan comment baru!')
+    return JsonResponse({"pesan": "halo"}, status=200)
 
 def change_comments(request):
     comments = Comment.objects.all()
