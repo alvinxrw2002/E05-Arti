@@ -48,11 +48,8 @@ def leaderboard_pengguna(request):
     return HttpResponse(serializers.serialize("json", users), content_type="application/json")
 
 def leaderboard_karya(request):
-    karya = Karya.objects.all()
-    context={
-        "karya": karya,
-    }
-    return render(request, "leaderboard_karya.html", context)
+    karya = Karya.objects.all().order_by("-harga")
+    return HttpResponse(serializers.serialize("json", karya), content_type="application/json")
 
 def delete_comment(request):
     comment = Comment.objects.filter(pk=int(request.POST.get('id')))
