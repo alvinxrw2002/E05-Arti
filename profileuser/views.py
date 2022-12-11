@@ -11,6 +11,8 @@ from profileuser.forms import UserImageForm
 from django.contrib.auth.decorators import login_required
 from arti.models import * 
 from beli_karya.models import *
+import json
+
 
 # Create your views here.
 
@@ -55,6 +57,7 @@ def add(request):
     }
     return HttpResponse(template.render(context, request)) 
 
+@login_required(login_url='/login')
 def show_edit_profile(request):
     username1 = request.POST['username']
     email1 = request.POST['email']
@@ -121,18 +124,22 @@ def show_ajax_profile(request):
     }
     return HttpResponse(template.render(context, request))
 
+@login_required(login_url='/login')
 def show_json_profile(request):
     dataProfile = Profile.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", dataProfile), content_type="application/json")
 
+@login_required(login_url='/login')
 def show_json_profile_img(request):
     dataProfileImg = UploadImage.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", dataProfileImg), content_type="application/json")
 
+@login_required(login_url='/login')
 def show_json_profile_img2(request):
     dataProfileImg2 = Karya.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", dataProfileImg2), content_type="application/json")
     
+@login_required(login_url='/login')
 def show_json_profile_imgbeli(request):
     dataProfileImgBeli = Transaksi.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", dataProfileImgBeli), content_type="application/json")
