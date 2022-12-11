@@ -127,19 +127,50 @@ def show_ajax_profile(request):
 @login_required(login_url='/login')
 def show_json_profile(request):
     dataProfile = Profile.objects.filter(user=request.user)
-    return HttpResponse(serializers.serialize("json", dataProfile), content_type="application/json")
+    lst = []
+    for data in dataProfile:
+        lst.append({
+            'username': data.username,
+            'email' : data.email,
+            'phone' : data.phone,
+            'address' : data.address,
+        })
+    return HttpResponse(json.dumps(lst), content_type="application/json")
 
 @login_required(login_url='/login')
 def show_json_profile_img(request):
     dataProfileImg = UploadImage.objects.filter(user=request.user)
-    return HttpResponse(serializers.serialize("json", dataProfileImg), content_type="application/json")
+    lst = []
+    for data in dataProfileImg:
+        lst.append({
+            'image' : data.image.url
+        })
+    return HttpResponse(json.dumps(lst), content_type="application/json")
 
 @login_required(login_url='/login')
 def show_json_profile_img2(request):
     dataProfileImg2 = Karya.objects.filter(user=request.user)
-    return HttpResponse(serializers.serialize("json", dataProfileImg2), content_type="application/json")
+    lst = []
+    for data in dataProfileImg2:
+        lst.append({
+            'gambar' : data.gambar.url,
+            'judul' : data.judul,
+        
+        })
+    return HttpResponse(json.dumps(lst), content_type="application/json")
     
 @login_required(login_url='/login')
 def show_json_profile_imgbeli(request):
     dataProfileImgBeli = Transaksi.objects.filter(user=request.user)
-    return HttpResponse(serializers.serialize("json", dataProfileImgBeli), content_type="application/json")
+    lst = []
+    donasi = 0
+    for jumlahDonasi in dataProfileImgBeli:
+        if jumlahDonasi.karya.sudah_dibeli == True:
+            if (len(lst) > 0):
+                lst.clear()
+            donasi += jumlahDonasi.karya.harga
+            lst.append({
+                'donasi' : donasi
+            })
+    
+    return HttpResponse(json.dumps(lst), content_type="application/json")
