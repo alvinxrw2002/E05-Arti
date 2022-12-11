@@ -124,9 +124,8 @@ def show_ajax_profile(request):
     }
     return HttpResponse(template.render(context, request))
 
-@login_required(login_url='/login')
 def show_json_profile(request):
-    dataProfile = Profile.objects.filter(user=request.user)
+    dataProfile = Profile.objects.all()
     lst = []
     for data in dataProfile:
         lst.append({
@@ -137,9 +136,8 @@ def show_json_profile(request):
         })
     return HttpResponse(json.dumps(lst), content_type="application/json")
 
-@login_required(login_url='/login')
 def show_json_profile_img(request):
-    dataProfileImg = UploadImage.objects.filter(user=request.user)
+    dataProfileImg = UploadImage.objects.all()
     lst = []
     for data in dataProfileImg:
         lst.append({
@@ -147,9 +145,8 @@ def show_json_profile_img(request):
         })
     return HttpResponse(json.dumps(lst), content_type="application/json")
 
-@login_required(login_url='/login')
 def show_json_profile_img2(request):
-    dataProfileImg2 = Karya.objects.filter(user=request.user)
+    dataProfileImg2 = Karya.objects.all()
     lst = []
     for data in dataProfileImg2:
         lst.append({
@@ -159,9 +156,8 @@ def show_json_profile_img2(request):
         })
     return HttpResponse(json.dumps(lst), content_type="application/json")
     
-@login_required(login_url='/login')
 def show_json_profile_imgbeli(request):
-    dataProfileImgBeli = Transaksi.objects.filter(user=request.user)
+    dataProfileImgBeli = Transaksi.objects.all()
     lst = []
     donasi = 0
     for jumlahDonasi in dataProfileImgBeli:
