@@ -155,15 +155,6 @@ def ajax_logout(request):
 
 @csrf_exempt
 def post_karya_flutter(request):
-    gambar = request.FILES["gambar"]
-    judul = request.POST["judul"]
-    kategori = request.POST["kategori"]
-    harga = request.POST["harga"]
-    deskripsi = request.POST["deskripsi"]
-    tanggal = datetime.now().date()
-    user_id = request.user.id
-    sudah_dibeli = False
-
     try:
         connection = connect(
                         user="postgres",
@@ -175,9 +166,12 @@ def post_karya_flutter(request):
 
         # Create a cursor to perform database operations
         cursor = connection.cursor()
-        cursor.execute("""
+        cursor.execute(f"""
         INSERT INTO arti_karya (gambar, judul, kategori, harga, deskripsi, tanggal, user_id, sudah_dibeli)
-        VALUES ('{gambar}', '{judul}', '{kategori}', '{harga}', '{deskripsi}', '{tanggal}', '{user_id}', '{sudah_dibeli}')
+        VALUES ('{request.FILES["gambar"]}', '{request.POST["judul"]}', 
+                '{request.POST["kategori"]}', '{int(request.POST["harga"])}', 
+                '{request.POST["deskripsi"]}', '{datetime.now().date()}', 
+                '{1}', '{False}')
         """)
         
     except (Exception, Error) as error:
