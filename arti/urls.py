@@ -12,6 +12,7 @@ urlpatterns = [
     path('register', register, name='register'),
     path('logout', logout_user, name='logout'),
     path('post-karya', post_karya, name='post_karya'),
+    path('post-karya-flutter', post_karya_flutter, name='post_karya_flutter'),
     path('delete-karya/<karya_id>', delete_karya, name='delete_karya'),
     path('edit-karya/<karya_id>', edit_karya, name='edit_karya'),
     path('ajax-login', ajax_login, name='ajax_login'),

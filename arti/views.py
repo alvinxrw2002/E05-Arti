@@ -10,6 +10,8 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import Karya, UserArti
 from .forms import FormKarya
 from django.http import JsonResponse
+from psycopg2 import Error, connect
+from datetime import datetime
 
 # Create your views here.
 def index(request):
@@ -143,9 +145,44 @@ def ajax_login(request):
         "message": "Failed to Login, check your email/password."
         }, status=401)
 
+
 @csrf_exempt
 def ajax_logout(request):
     logout(request)
     return JsonResponse({
         "message":"Logout success.",
     }, status=200)
+
+@csrf_exempt
+def post_karya_flutter(request):
+    gambar = request.FILES["gambar"]
+    judul = request.POST["judul"]
+    kategori = request.POST["kategori"]
+    harga = request.POST["harga"]
+    deskripsi = request.POST["deskripsi"]
+    tanggal = datetime.now().date()
+    user_id = 1
+    sudah_dibeli = False
+
+    try:
+        connection = connect(
+                        user="postgres",
+                        password="e5eZEF2aRABO4ACQQifl",
+                        host="containers-us-west-138.railway.app",
+                        port="5432",
+                        database="railway"
+                    )
+
+        # Create a cursor to perform database operations
+        cursor = connection.cursor()
+        cursor.execute("""
+        INSERT INTO arti_karya (gambar, judul, kategori, harga, deskripsi, tanggal, user_id, sudah_dibeli)
+        VALUES ('{gambar}', '{judul}', '{kategori}', '{harga}', '{deskripsi}', '{tanggal}', '{user_id}', '{sudah_dibeli}')
+        """)
+        
+    except (Exception, Error) as error:
+        print("Error while connecting to PostgreSQL", error)
+    
+    finally:
+        cursor.close()
+        return HttpResponse("success")
