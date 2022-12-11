@@ -161,7 +161,7 @@ def post_karya_flutter(request):
     harga = request.POST["harga"]
     deskripsi = request.POST["deskripsi"]
     tanggal = datetime.now().date()
-    user_id = 1
+    user_id = request.user.id
     sudah_dibeli = False
 
     try:
