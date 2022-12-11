@@ -145,6 +145,14 @@ def ajax_login(request):
         "message": "Failed to Login, check your email/password."
         }, status=401)
 
+
+@csrf_exempt
+def ajax_logout(request):
+    logout(request)
+    return JsonResponse({
+        "message":"Logout success.",
+    }, status=200)
+
 @csrf_exempt
 def post_karya_flutter(request):
     gambar = request.FILES["gambar"]

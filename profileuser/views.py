@@ -11,6 +11,8 @@ from profileuser.forms import UserImageForm
 from django.contrib.auth.decorators import login_required
 from arti.models import * 
 from beli_karya.models import *
+import json
+
 
 # Create your views here.
 
@@ -35,6 +37,7 @@ def show_profile(request):
         'donasi' : donasi,
 
     }
+    
     return HttpResponse(template.render(context, request))
 
 def add(request):
@@ -54,6 +57,7 @@ def add(request):
     }
     return HttpResponse(template.render(context, request)) 
 
+@login_required(login_url='/login')
 def show_edit_profile(request):
     username1 = request.POST['username']
     email1 = request.POST['email']
@@ -68,7 +72,13 @@ def show_edit_profile(request):
         mobile = mobile1,
         address = address1)
         
-    profile1.save()
+    if(len(Profile.objects.filter(user=request.user)) < 1):
+        profile1.save()
+
+    else:
+        Profile.objects.filter(user=request.user).delete()
+        profile1.save() 
+
     return HttpResponseRedirect(reverse('profileuser:show_profile'))
 
 @login_required(login_url='/login')
@@ -76,8 +86,13 @@ def image_request(request):
     if request.method == 'POST':  
         form = UserImageForm(request.POST, request.FILES)  
         if form.is_valid():
-            form.instance.user = request.user  
-            form.save()  
+            form.instance.user = request.user
+            if(len(UploadImage.objects.filter(user=request.user)) < 1):
+                form.save()
+
+            else:
+                UploadImage.objects.filter(user=request.user).delete()
+                form.save()     
   
             # Getting the current instance object to display in the template  
             img_object = form.instance  
@@ -109,7 +124,22 @@ def show_ajax_profile(request):
     }
     return HttpResponse(template.render(context, request))
 
+@login_required(login_url='/login')
+def show_json_profile(request):
+    dataProfile = Profile.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize("json", dataProfile), content_type="application/json")
+
+@login_required(login_url='/login')
+def show_json_profile_img(request):
+    dataProfileImg = UploadImage.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize("json", dataProfileImg), content_type="application/json")
+
+@login_required(login_url='/login')
+def show_json_profile_img2(request):
+    dataProfileImg2 = Karya.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize("json", dataProfileImg2), content_type="application/json")
     
-
-
-
+@login_required(login_url='/login')
+def show_json_profile_imgbeli(request):
+    dataProfileImgBeli = Transaksi.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize("json", dataProfileImgBeli), content_type="application/json")
