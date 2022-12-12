@@ -197,3 +197,12 @@ def ajax_register(request):
 def ajax_logout(request):
     logout(request)
     return JsonResponse({"status": 1}, status = 200)
+
+@csrf_exempt
+def post_karya_flutter(request):
+    form = FormKarya(request.POST, request.FILES)
+    if form.is_valid():
+        karya = form.save(commit=False)
+        karya.user = request.user
+        karya.save()
+    return JsonResponse({"message": "success"}, status=200)
