@@ -209,21 +209,15 @@ def show_json_profile_save(request):
 
         profile.save()
         lst.append(profile)
-
-
         
-    # if(len(Profile.objects.all()) < 1):
-    #     profile.save()
-
-    # else:
-    #     Profile.objects.all().delete()
-    #     profile.save() 
-
         return JsonResponse({
-         "message" : "succes"
-      })
+                'username' : profile.username,
+                'email' : profile.email,
+                'phone' : profile.phone,
+                'address' : profile.address,
+            })
     
-    return HttpResponse(json.dumps(lst), content_type="application/json")
+    return HttpResponse("success")
 
 
 
