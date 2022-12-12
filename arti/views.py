@@ -178,4 +178,4 @@ def post_karya_flutter(request):
     
     finally:
         cursor.close()
-        return HttpResponse("success")
+        return JsonResponse({"message": "success"}, status=200)
