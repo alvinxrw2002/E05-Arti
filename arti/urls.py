@@ -18,5 +18,4 @@ urlpatterns = [
     path('ajax-login', ajax_login, name='ajax_login'),
     path('ajax-logout', ajax_logout, name="ajax_logout"),
     path('ajax-register', ajax_register, name="ajax_register"),
-    path('ajax-logout', ajax_logout, name="ajax_logout"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
