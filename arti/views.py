@@ -192,4 +192,4 @@ def ajax_register(request):
             new_user_arti = UserArti(user = new_user, kategori_favorit = new_kategori)
             new_user_arti.save()
             return JsonResponse({"status":1}, status= 200)
-    return JsonResponse({"status":form.is_valid()}, status=200)
+    return JsonResponse({"status":0}, status=200)
