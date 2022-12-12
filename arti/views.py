@@ -11,7 +11,6 @@ from .models import Karya, UserArti
 from .forms import FormKarya
 from django.http import JsonResponse
 from psycopg2 import Error, connect
-from datetime import datetime
 
 # Create your views here.
 def index(request):
@@ -170,7 +169,7 @@ def post_karya_flutter(request):
         INSERT INTO arti_karya (gambar, judul, kategori, harga, deskripsi, tanggal, user_id, sudah_dibeli)
         VALUES ('{request.FILES["gambar"]}', '{request.POST["judul"]}', 
                 '{request.POST["kategori"]}', '{int(request.POST["harga"])}', 
-                '{request.POST["deskripsi"]}', '{datetime.now().date()}', 
+                '{request.POST["deskripsi"]}', '{datetime.datetime.now().date()}', 
                 '{1}', '{False}')
         """)
         
