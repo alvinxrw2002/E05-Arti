@@ -17,4 +17,5 @@ urlpatterns = [
     path('edit-karya/<karya_id>', edit_karya, name='edit_karya'),
     path('ajax-login', ajax_login, name='ajax_login'),
     path('ajax-logout', ajax_logout, name="ajax_logout"),
+    path('ajax-register', ajax_register, name="ajax_register")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
