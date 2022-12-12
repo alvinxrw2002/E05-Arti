@@ -179,3 +179,17 @@ def post_karya_flutter(request):
     finally:
         cursor.close()
         return JsonResponse({"message": "success"}, status=200)
+
+@csrf_exempt
+def ajax_register(request):
+    form = UserCreationForm()
+
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            new_user = form.save()
+            new_kategori = request.POST.get('kategori')
+            new_user_arti = UserArti(user = new_user, kategori_favorit = new_kategori)
+            new_user_arti.save()
+            return JsonResponse({"status":1}, status= 200)
+    return JsonResponse({"status":0}, status=200)
