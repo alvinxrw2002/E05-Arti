@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from .models import Karya, UserArti
 from .forms import FormKarya
+from django.http import JsonResponse
+from psycopg2 import Error, connect
 
 # Create your views here.
 def index(request):
@@ -87,7 +89,7 @@ def post_karya(request):
             karya = form.save(commit=False)
             karya.user = request.user
             karya.save()
-            return redirect('arti:galeri')
+            return redirect('galeri:show_galeri')
 
     # jika method-nya GET atau yang lainnya, buat form kosong
     else:
@@ -114,3 +116,84 @@ def edit_karya(request, karya_id):
     karya_edit.deskripsi = request.POST["deskripsi"]
     karya_edit.save()
     return HttpResponse("success")
+
+
+@csrf_exempt
+def ajax_login(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username=username, password=password)
+    if user is not None:
+        if user.is_active:
+            login(request, user)
+            # Redirect to a success page.
+            return JsonResponse({
+            "status": True,
+            "message": "Successfully Logged In!"
+            # Insert any extra data if you want to pass data to Flutter
+            }, status=200)
+        else:
+            return JsonResponse({
+            "status": False,
+            "message": "Failed to Login, Account Disabled."
+            }, status=401)
+
+    else:
+        return JsonResponse({
+        "status": False,
+        "message": "Failed to Login, check your email/password."
+        }, status=401)
+
+
+@csrf_exempt
+def ajax_logout(request):
+    logout(request)
+    return JsonResponse({
+        "message":"Logout success.",
+    }, status=200)
+
+@csrf_exempt
+def post_karya_flutter(request):
+    try:
+        connection = connect(
+                        user="postgres",
+                        password="e5eZEF2aRABO4ACQQifl",
+                        host="containers-us-west-138.railway.app",
+                        port="5432",
+                        database="railway"
+                    )
+
+        # Create a cursor to perform database operations
+        cursor = connection.cursor()
+        cursor.execute(f"""
+        INSERT INTO arti_karya (gambar, judul, kategori, harga, deskripsi, tanggal, user_id, sudah_dibeli)
+        VALUES ('{request.FILES["gambar"]}', '{request.POST["judul"]}', 
+                '{request.POST["kategori"]}', '{int(request.POST["harga"])}', 
+                '{request.POST["deskripsi"]}', '{datetime.datetime.now().date()}', 
+                '{1}', '{False}')
+        """)
+        
+    except (Exception, Error) as error:
+        print("Error while connecting to PostgreSQL", error)
+    
+    finally:
+        cursor.close()
+        return JsonResponse({"message": "success"}, status=200)
+
+@csrf_exempt
+def ajax_register(request):
+    form = UserCreationForm()
+
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            new_user = form.save()
+            new_kategori = request.POST.get('kategori')
+            new_user_arti = UserArti(user = new_user, kategori_favorit = new_kategori)
+            new_user_arti.save()
+            return JsonResponse({"status":1}, status= 200)
+    return JsonResponse({"status":0}, status=200)
+
+def ajax_logout(request):
+    logout(request)
+    return JsonResponse({"status": 1}, status = 200)

@@ -3,7 +3,7 @@
 }
 
 #header{
-    background-image: url('14649402_SL_043021_42650_02.jpg');
+    background-image: url('/static/img/14649402_SL_043021_42650_02.jpg');
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -12,7 +12,7 @@
 }
 
 #comments{
-    background-image: url('14649402_SL_043021_42650_02.jpg');
+    background-image: url('/static/img/14649402_SL_043021_42650_02.jpg');
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;

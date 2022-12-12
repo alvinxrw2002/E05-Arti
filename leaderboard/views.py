@@ -9,6 +9,9 @@ from django.http import HttpResponse
 from arti.models import Karya
 from django.http import HttpResponse
 from django.core import serializers
+from leaderboard.models import UserExtended
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 
 # Create your views here.
 # @login_required(login_url='/login/')
@@ -22,7 +25,8 @@ def show_leaderboard(request):
         'form' : new_form,
     }
     return render(request, 'leaderboard.html', context)
-    
+
+@csrf_exempt
 def create_comment(request):
     form = CommentForm(request.POST)
     if form.is_valid():
@@ -30,25 +34,22 @@ def create_comment(request):
        comment.user = request.user
        comment.username = request.user.username
        comment.save()
-    return HttpResponse('Berhasil menambahkan comment baru!')
+    return JsonResponse({"message": "success"}, status=200)
 
 def change_comments(request):
     comments = Comment.objects.all()
     return HttpResponse(serializers.serialize("json", comments), content_type="application/json")
 
 def leaderboard_pengguna(request):
-    users = User.objects.all().order_by("pk")
+    users = UserExtended.objects.all().order_by("-pembelian")
     # context={
     #     "users": users,
     # }
     return HttpResponse(serializers.serialize("json", users), content_type="application/json")
 
 def leaderboard_karya(request):
-    karya = Karya.objects.all()
-    context={
-        "karya": karya,
-    }
-    return render(request, "leaderboard_karya.html", context)
+    karya = Karya.objects.all().order_by("-harga")
+    return HttpResponse(serializers.serialize("json", karya), content_type="application/json")
 
 def delete_comment(request):
     comment = Comment.objects.filter(pk=int(request.POST.get('id')))
