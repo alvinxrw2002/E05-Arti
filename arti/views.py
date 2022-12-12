@@ -193,3 +193,7 @@ def ajax_register(request):
             new_user_arti.save()
             return JsonResponse({"status":1}, status= 200)
     return JsonResponse({"status":0}, status=200)
+
+def ajax_logout(request):
+    logout(request)
+    return JsonResponse({"status": 1}, status = 200)
