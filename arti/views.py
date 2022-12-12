@@ -98,6 +98,15 @@ def post_karya(request):
     # Tampilkan form baru
     return render(request, 'post-karya.html', {'form': form})
 
+@csrf_exempt
+def post_karya_flutter(request):
+    form = FormKarya(request.POST, request.FILES)
+    if form.is_valid():
+        karya = form.save(commit=False)
+        karya.user = request.user
+        karya.save()
+    return JsonResponse({"message": "success"}, status=200)
+
 @login_required(login_url='/login')
 def delete_karya(request, karya_id):
     karya_dihapus = Karya.objects.get(pk = karya_id)
@@ -151,34 +160,6 @@ def ajax_logout(request):
     return JsonResponse({
         "message":"Logout success.",
     }, status=200)
-
-@csrf_exempt
-def post_karya_flutter(request):
-    try:
-        connection = connect(
-                        user="postgres",
-                        password="e5eZEF2aRABO4ACQQifl",
-                        host="containers-us-west-138.railway.app",
-                        port="5432",
-                        database="railway"
-                    )
-
-        # Create a cursor to perform database operations
-        cursor = connection.cursor()
-        cursor.execute(f"""
-        INSERT INTO arti_karya (gambar, judul, kategori, harga, deskripsi, tanggal, user_id, sudah_dibeli)
-        VALUES ('{request.FILES["gambar"]}', '{request.POST["judul"]}', 
-                '{request.POST["kategori"]}', '{int(request.POST["harga"])}', 
-                '{request.POST["deskripsi"]}', '{datetime.datetime.now().date()}', 
-                '{1}', '{False}')
-        """)
-        
-    except (Exception, Error) as error:
-        print("Error while connecting to PostgreSQL", error)
-    
-    finally:
-        cursor.close()
-        return JsonResponse({"message": "success"}, status=200)
 
 @csrf_exempt
 def ajax_register(request):
