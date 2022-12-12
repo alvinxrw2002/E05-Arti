@@ -13,6 +13,7 @@ from arti.models import *
 from beli_karya.models import *
 import json
 from django.views.decorators.csrf import requires_csrf_token
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -173,24 +174,31 @@ def show_json_profile_imgbeli(request):
 
 @requires_csrf_token
 def show_json_profile_save(request):
-    username1 = request.POST['username']
-    email1 = request.POST['email']
-    phone1 = request.POST['phone']
-    mobile1 = request.POST['mobile']
-    address1 = request.POST['address']
-    profile1 = Profile(
-        user=request.user,
-        username = username1,
-        email = email1,
-        phone = phone1,
-        mobile = mobile1,
-        address = address1)
+    lst = []
+    if (request.method == 'POST'):
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        mobile = request.POST.get('mobile')
+        address = request.POST.get('address')
+        profile = Profile(
+            user=request.user,
+            username = username,
+            email = email,
+            phone = phone,
+            mobile = mobile,
+            address = address)
+
+        profile.save()
+
+        lst.append(profile)
         
-    if(len(Profile.objects.all()) < 1):
-        profile1.save()
+    # if(len(Profile.objects.all()) < 1):
+    #     profile.save()
 
-    else:
-        Profile.objects.all().delete()
-        profile1.save() 
+    # else:
+    #     Profile.objects.all().delete()
+    #     profile.save() 
 
-    return HttpResponse(serializers.serialize("json", profile1), content_type="application/json")
+        return HttpResponse(serializers.serialize("json", profile), content_type="application/json")
+    return HttpResponse(json.dumps(lst), content_type="application/json")
