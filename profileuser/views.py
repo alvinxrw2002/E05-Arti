@@ -12,8 +12,9 @@ from django.contrib.auth.decorators import login_required
 from arti.models import * 
 from beli_karya.models import *
 import json
-from django.views.decorators.csrf import requires_csrf_token
+from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+from django.contrib import messages
 
 # Create your views here.
 
@@ -172,16 +173,15 @@ def show_json_profile_imgbeli(request):
     
     return HttpResponse(json.dumps(lst), content_type="application/json")
 
-@requires_csrf_token
+@csrf_exempt
 def show_json_profile_save(request):
-    lst = []
     if (request.method == 'POST'):
         username = request.POST.get('username')
         email = request.POST.get('email')
         phone = request.POST.get('phone')
         mobile = request.POST.get('mobile')
         address = request.POST.get('address')
-        profile = Profile(
+        profile = Profile.objects.create(
             user=request.user,
             username = username,
             email = email,
@@ -191,7 +191,6 @@ def show_json_profile_save(request):
 
         profile.save()
 
-        lst.append(profile)
         
     # if(len(Profile.objects.all()) < 1):
     #     profile.save()
@@ -200,5 +199,8 @@ def show_json_profile_save(request):
     #     Profile.objects.all().delete()
     #     profile.save() 
 
-        return HttpResponse(serializers.serialize("json", profile), content_type="application/json")
-    return HttpResponse(json.dumps(lst), content_type="application/json")
+        return JsonResponse({
+         "message" : "succes"
+      })
+
+    
