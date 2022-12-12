@@ -14,5 +14,6 @@ urlpatterns = [
     path('profile-img-json', show_json_profile_img, name='show_json_profile_img'),
     path('profile-img2-json', show_json_profile_img2, name='show_json_profile_img2'),
     path('profile-imgbeli-json', show_json_profile_imgbeli, name='show_json_profile_imgbeli'),
+    path('profile-save', show_json_profile_save, name='show_json_profile_save'),
 
 ]
